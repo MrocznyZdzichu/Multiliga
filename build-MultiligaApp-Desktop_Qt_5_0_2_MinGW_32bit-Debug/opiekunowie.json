@@ -1,0 +1,5 @@
+{
+	"opiekunowie": [
+						{"email": "abc@wp.pl", "imie": "Jan", "nazwisko": "Kowalski", "haslo": "JK", "level": "opiekun"}
+					]
+}

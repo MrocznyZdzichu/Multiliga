@@ -1,0 +1,19 @@
+///////////////////////////////////////////////////////////
+//  CMecz.cpp
+//  Implementation of the Class CMecz
+//  Created on:      15-sty-2019 02:11:59
+//  Original author: Myles
+///////////////////////////////////////////////////////////
+
+#include "CMecz.h"
+
+
+CMecz::CMecz(){
+
+}
+
+
+
+CMecz::~CMecz(){
+
+}

@@ -1,0 +1,6 @@
+{"Opiekun1: {
+	"mail": "jkmacierz@wp.pl",
+	"imie": "Jerzy",
+	"nazwisko": "Kurek"
+	"haslo": "Kalman"
+}}
