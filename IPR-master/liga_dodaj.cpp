@@ -97,7 +97,7 @@ void liga_dodaj::on_pushButton_5_clicked()
         }
         else
         {
-            ui->label_3->setText("Już istnieje taka liga");
+            ui->label_3->setText("Nazwa ligi musi być unikalna");
         }
     }
     else

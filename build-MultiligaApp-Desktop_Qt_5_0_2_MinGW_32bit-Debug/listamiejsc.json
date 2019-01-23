@@ -1,7 +1,7 @@
 {
 	"listaMiejsc":	[
 						{"nazwa miejsca": "Gol", "miasto": "Warszawa", "dyscypliny": ["pilka nozna"], "oplata": [100]},
-						{"nazwa miejsca": "Kij", "miasto": "Szczytno", "dyscypliny": ["krykiet"], "oplata": [20]}
+						{"nazwa miejsca": "Kij", "miasto": "Szczytno", "dyscypliny": ["krykiet"], "oplata": [20]},
 						{"nazwa miejsca": "Giercownia", "miasto": "Grunwald", "dyscypliny": ["pilka nozna"], "oplata": [75.000000]},
 						{"nazwa miejsca": "Hokeisci za dwie dychy", "miasto": "Grunwald", "dyscypliny": ["hokej"], "oplata": [20.000000]}
 					]

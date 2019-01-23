@@ -1,7 +1,7 @@
 {
 	"listaDruzyn": 	[
 						{"nazwa": "Miernoty tenisa", "dyscyplina": "tenis", "gracze": ["Eustachy Noga", "Alojzy Kolano"], "liga": "Deblowe zawody", "miasto": "Warszawa", "opis": "Kortowi wymiatacze", "poprzednia liga": "brak", "osiagniecia": "brak"},
-						{"nazwa": "Wielkie bale", "dyscyplina": "krykiet", "gracze": ["Antoni Mistrz", "Henryk Emeryt", "Ignacy Maczeta"], "liga": "LigaDrewna", "miasto": "Szczytno", "opis": "Machamy kijami jak kura skrzydlami", "poprzednia liga": "brak", "osiagniecia": "brak"},
-						{"nazwa": "Rakiety niebalistyczne", "dyscyplina": "tenis", "gracze": ["Witalij Schodow", "Grigorij Grzebieniow"], "liga": "brak", "miasto": "Warszawa", "opis": "Gem, set, mecz", "poprzednia liga": "brak", "osiagniecia": "brak"}
+						{"nazwa": "Wielkie bale", "dyscyplina": "krykiet", "gracze": ["Antoni Mistrz", "Henryk Emeryt", "Ignacy Maczeta"], "liga": "brak", "miasto": "Szczytno", "opis": "Machamy kijami jak kura skrzydlami", "poprzednia liga": "brak", "osiagniecia": "brak"},
+						{"nazwa": "Rakiety niebalistyczne", "dyscyplina": "tenis", "gracze": ["Witalij Schodow", "Grigorij Grzebieniow"], "liga": "Deblowe zawody", "miasto": "Warszawa", "opis": "Gem, set, mecz", "poprzednia liga": "brak", "osiagniecia": "brak"}
 					]
 }
