@@ -35,6 +35,10 @@ void dodaj_miejsce::on_pushButton_3_clicked()
         ui->label_3->setText("Proszę wprowadzić wszystkie dane");
         return;
     }
+    if (newPlacePayment <= 0)
+    {
+        ui->label_3->setText("Prosze podać dodania stawke");
+    }
 
     if (CRest::getRest().logged_user->sprawdz_haslo(providedPwd))
     {
@@ -43,7 +47,8 @@ void dodaj_miejsce::on_pushButton_3_clicked()
         newPlace->wyslij_siebie();
 
         CRest::getRest().dodaj_miejsce_rozgrywki();
-        this->close();
+        this->wyswietlenieMiejsca = new profil_miejsca(this, newPlace);
+        this->wyswietlenieMiejsca->open();
     }
     else
     {

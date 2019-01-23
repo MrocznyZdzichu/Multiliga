@@ -9,8 +9,15 @@
 #include "CZaproszenieLiga.h"
 
 
-CZaproszenieLiga::CZaproszenieLiga(){
+CZaproszenieLiga::CZaproszenieLiga(std::string nazwaDruzyny, std::string nazwaLigi)
+{
+    this->dataUtworzenia = QDateTime::currentDateTime();
 
+    this->druzyna = new CDruzyna;
+    this->druzyna->nazwa = nazwaDruzyny;
+
+    this->liga = new CLiga;
+    this->liga->nazwaLigi = nazwaLigi;
 }
 
 

@@ -35,32 +35,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QCommandLinkButton" name="commandLinkButton_8">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>187</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Gracz / Drużna 1</string>
-    </property>
-   </widget>
-   <widget class="QCommandLinkButton" name="commandLinkButton_9">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>70</y>
-      <width>187</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Gracz / Drużna 2</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
@@ -82,19 +56,6 @@
       <width>271</width>
       <height>201</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QCommandLinkButton" name="commandLinkButton_7">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>187</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Kolejka 2</string>
     </property>
    </widget>
   </widget>
@@ -120,19 +81,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QCommandLinkButton" name="commandLinkButton_6">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>187</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Kolejka 1</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QCommandLinkButton" name="commandLinkButton_2">
    <property name="geometry">
@@ -144,7 +92,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Zmień zasady ligi (opiekun)</string>
+    <string>Zmień zasady ligi)</string>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox_5">
@@ -310,7 +258,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Edytuj ligę (opiekun)</string>
+    <string>Edytuj ligę </string>
    </property>
   </widget>
  </widget>

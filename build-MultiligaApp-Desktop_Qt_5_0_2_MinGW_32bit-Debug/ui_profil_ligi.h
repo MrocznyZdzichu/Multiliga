@@ -30,14 +30,10 @@ class Ui_profil_ligi
 public:
     QGroupBox *groupBox_4;
     QListView *listView_3;
-    QCommandLinkButton *commandLinkButton_8;
-    QCommandLinkButton *commandLinkButton_9;
     QGroupBox *groupBox_3;
     QListView *listView_2;
-    QCommandLinkButton *commandLinkButton_7;
     QGroupBox *groupBox_2;
     QListView *listView;
-    QCommandLinkButton *commandLinkButton_6;
     QCommandLinkButton *commandLinkButton_2;
     QGroupBox *groupBox_5;
     QWidget *layoutWidget;
@@ -71,30 +67,18 @@ public:
         listView_3 = new QListView(groupBox_4);
         listView_3->setObjectName(QStringLiteral("listView_3"));
         listView_3->setGeometry(QRect(10, 20, 271, 381));
-        commandLinkButton_8 = new QCommandLinkButton(groupBox_4);
-        commandLinkButton_8->setObjectName(QStringLiteral("commandLinkButton_8"));
-        commandLinkButton_8->setGeometry(QRect(20, 30, 187, 41));
-        commandLinkButton_9 = new QCommandLinkButton(groupBox_4);
-        commandLinkButton_9->setObjectName(QStringLiteral("commandLinkButton_9"));
-        commandLinkButton_9->setGeometry(QRect(20, 70, 187, 41));
         groupBox_3 = new QGroupBox(profil_ligi);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
         groupBox_3->setGeometry(QRect(320, 230, 291, 231));
         listView_2 = new QListView(groupBox_3);
         listView_2->setObjectName(QStringLiteral("listView_2"));
         listView_2->setGeometry(QRect(10, 20, 271, 201));
-        commandLinkButton_7 = new QCommandLinkButton(groupBox_3);
-        commandLinkButton_7->setObjectName(QStringLiteral("commandLinkButton_7"));
-        commandLinkButton_7->setGeometry(QRect(20, 30, 187, 41));
         groupBox_2 = new QGroupBox(profil_ligi);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         groupBox_2->setGeometry(QRect(320, 10, 291, 211));
         listView = new QListView(groupBox_2);
         listView->setObjectName(QStringLiteral("listView"));
         listView->setGeometry(QRect(10, 20, 271, 181));
-        commandLinkButton_6 = new QCommandLinkButton(groupBox_2);
-        commandLinkButton_6->setObjectName(QStringLiteral("commandLinkButton_6"));
-        commandLinkButton_6->setGeometry(QRect(20, 30, 187, 41));
         commandLinkButton_2 = new QCommandLinkButton(profil_ligi);
         commandLinkButton_2->setObjectName(QStringLiteral("commandLinkButton_2"));
         commandLinkButton_2->setGeometry(QRect(10, 510, 231, 41));
@@ -190,13 +174,9 @@ public:
     {
         profil_ligi->setWindowTitle(QApplication::translate("profil_ligi", "Dialog", 0));
         groupBox_4->setTitle(QApplication::translate("profil_ligi", "Tabela:", 0));
-        commandLinkButton_8->setText(QApplication::translate("profil_ligi", "Gracz / Dru\305\274na 1", 0));
-        commandLinkButton_9->setText(QApplication::translate("profil_ligi", "Gracz / Dru\305\274na 2", 0));
         groupBox_3->setTitle(QApplication::translate("profil_ligi", "Nadchodz\304\205ce kolejki:", 0));
-        commandLinkButton_7->setText(QApplication::translate("profil_ligi", "Kolejka 2", 0));
         groupBox_2->setTitle(QApplication::translate("profil_ligi", "Rozegrane kolejki:", 0));
-        commandLinkButton_6->setText(QApplication::translate("profil_ligi", "Kolejka 1", 0));
-        commandLinkButton_2->setText(QApplication::translate("profil_ligi", "Zmie\305\204 zasady ligi (opiekun)", 0));
+        commandLinkButton_2->setText(QApplication::translate("profil_ligi", "Zmie\305\204 zasady ligi)", 0));
         groupBox_5->setTitle(QApplication::translate("profil_ligi", "Domy\305\233lne zasady:", 0));
         label_5->setText(QApplication::translate("profil_ligi", "Ilo\305\233\304\207 kolejek:", 0));
         label_6->setText(QApplication::translate("profil_ligi", "Ilo\305\233\304\207 meczy na kolejk\304\231:", 0));
@@ -212,7 +192,7 @@ public:
         label_2->setText(QApplication::translate("profil_ligi", "Ogranizator: Opiekun X", 0));
         commandLinkButton->setText(QApplication::translate("profil_ligi", "Zobacz poprzedni sezon", 0));
         pushButton->setText(QApplication::translate("profil_ligi", "Powr\303\263t", 0));
-        commandLinkButton_4->setText(QApplication::translate("profil_ligi", "Edytuj lig\304\231 (opiekun)", 0));
+        commandLinkButton_4->setText(QApplication::translate("profil_ligi", "Edytuj lig\304\231 ", 0));
     } // retranslateUi
 
 };

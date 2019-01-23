@@ -81,3 +81,8 @@ void profil_ligi::wczytaj_dane()
         text1 += std::to_string(d["zasady"]["liczba punktow do zwyciestwa"].GetInt());
     ui->label_11->setText(QString::fromStdString(text1));
 }
+
+void profil_ligi::on_pushButton_clicked()
+{
+    this->close();
+}

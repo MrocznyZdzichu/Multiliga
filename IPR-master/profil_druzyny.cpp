@@ -1,6 +1,7 @@
 #include "profil_druzyny.h"
 #include "ui_profil_druzyny.h"
 #include "CListaLig.h"
+
 profil_druzyny::profil_druzyny(QWidget *parent, std::string jsonname) :
     QDialog(parent),
     ui(new Ui::profil_druzyny)
@@ -45,6 +46,17 @@ void profil_druzyny::wczytaj_dane()
         {
             this->ui->comboBox->addItem(QString::fromStdString(i["nazwa"].GetString()));
         }
+    }
+
+    if (wyswietlanaDruzyna->druzynaDOM["liga"] == "brak")
+    {
+        this->ui->pushButton_5->setEnabled(0);
+        this->ui->pushButton_4->setEnabled(1);
+    }
+    else
+    {
+        this->ui->pushButton_4->setEnabled(0);
+        this->ui->pushButton_5->setEnabled(1);
     }
 }
 void parsujZawodnikow(const Document &DOM, std::string &imie, std::string &nazwisko, std::string rawString,
@@ -168,5 +180,22 @@ void profil_druzyny::ustawTabele(const Document &d)
 
 void profil_druzyny::on_pushButton_4_clicked()
 {
+    std::string nazwaDruzyny = "";
+    std::string nazwaLigi = "";
+    std::string labelText;
+    std::string comboText;
 
+    labelText = ui->label->text().toStdString();
+    comboText = ui->comboBox->currentText().toStdString();
+
+    for (int i = 7; i < labelText.size(); i++)
+        nazwaDruzyny += labelText[i];
+
+    nazwaLigi = comboText;
+
+    CZaproszenieLiga* zaproszenie = new CZaproszenieLiga(nazwaDruzyny, nazwaLigi);
+    zaproszeniaDruzynDoLig.push_back(zaproszenie);
+
+    ui->label_9->setText("Stworzono zaproszenie");
+    ui->pushButton_4->setEnabled(0);
 }

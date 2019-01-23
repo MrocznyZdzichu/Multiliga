@@ -19,7 +19,7 @@ CMiejsce::CMiejsce(std::string nazwa_miejsca, std::string miasto,
     this->nazwa_miejsca = nazwa_miejsca;
     this->miasto = miasto;
     this->dyscypliny.push_back(dyscyplina);
-    this->oplata = oplata;
+    this->oplaty.push_back(oplata);
 }
 
 CMiejsce::~CMiejsce()
@@ -43,9 +43,16 @@ void CMiejsce::serializuj()
         else
             this->JSonString+="\"";
     }
-    this->JSonString+="], \"oplata\": ";
-    this->JSonString+=std::to_string(this->oplata);
-    this->JSonString+="}";
+    this->JSonString+="], \"oplata\": [";
+    for (int i = 0; i < this->oplaty.size(); i++)
+    {
+        this->JSonString+=std::to_string(this->oplaty[i]);
+        if (i != this->dyscypliny.size()-1)
+            this->JSonString+=", ";
+        else
+            this->JSonString+="";
+    }
+    this->JSonString+="]}";
 }
 void CMiejsce::wyslij_siebie()
 {
@@ -58,5 +65,18 @@ void CMiejsce::wyslij_siebie()
 
 Document CMiejsce::deserializuj(std::string jsonname)
 {
+    bool flag;
+    Document d = CRest::getRest().getJSonAndPass(jsonname.c_str(), flag);
+    if (flag)
+        return d;
+}
 
+std::string CMiejsce::getName()
+{
+    return this->nazwa_miejsca;
+}
+
+std::string CMiejsce::getTown()
+{
+    return this->miasto;
 }

@@ -24,6 +24,7 @@ private:
 
 private slots:
     void wczytaj_dane();
+    void on_pushButton_clicked();
 };
 
 #endif // PROFIL_LIGI_H

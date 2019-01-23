@@ -55,6 +55,7 @@ public:
     QPushButton *pushButton_5;
     QPushButton *pushButton_6;
     QPushButton *pushButton_3;
+    QLabel *label_9;
 
     void setupUi(QDialog *profil_druzyny)
     {
@@ -128,7 +129,7 @@ public:
         tableWidget->setGeometry(QRect(15, 20, 401, 251));
         comboBox = new QComboBox(profil_druzyny);
         comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setGeometry(QRect(520, 130, 211, 22));
+        comboBox->setGeometry(QRect(480, 140, 151, 22));
         horizontalLayoutWidget = new QWidget(profil_druzyny);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
         horizontalLayoutWidget->setGeometry(QRect(480, 180, 311, 80));
@@ -147,7 +148,7 @@ public:
 
         label_8 = new QLabel(profil_druzyny);
         label_8->setObjectName(QStringLiteral("label_8"));
-        label_8->setGeometry(QRect(580, 100, 111, 20));
+        label_8->setGeometry(QRect(510, 110, 111, 20));
         verticalLayoutWidget = new QWidget(profil_druzyny);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
         verticalLayoutWidget->setGeometry(QRect(550, 280, 171, 251));
@@ -169,6 +170,9 @@ public:
 
         verticalLayout_3->addWidget(pushButton_3);
 
+        label_9 = new QLabel(profil_druzyny);
+        label_9->setObjectName(QStringLiteral("label_9"));
+        label_9->setGeometry(QRect(650, 140, 131, 16));
 
         retranslateUi(profil_druzyny);
 
@@ -194,6 +198,7 @@ public:
         pushButton_5->setText(QApplication::translate("profil_druzyny", "Usu\305\204 z ligi", 0));
         pushButton_6->setText(QApplication::translate("profil_druzyny", "Edytuj dru\305\274yn\304\231", 0));
         pushButton_3->setText(QApplication::translate("profil_druzyny", "Usu\305\204 dru\305\274yn\304\231", 0));
+        label_9->setText(QString());
     } // retranslateUi
 
 };

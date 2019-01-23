@@ -20,8 +20,8 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -45,10 +45,9 @@ public:
     QLineEdit *lineEdit;
     QLineEdit *lineEdit_2;
     QGroupBox *groupBox_2;
-    QListView *listView;
-    QCommandLinkButton *commandLinkButton;
+    QTableWidget *tableWidget;
     QPushButton *pushButton_3;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_4;
     QCommandLinkButton *commandLinkButton_2;
     QCommandLinkButton *commandLinkButton_3;
@@ -97,11 +96,13 @@ public:
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         lineEdit = new QLineEdit(layoutWidget_2);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        lineEdit->setEnabled(false);
 
         verticalLayout_2->addWidget(lineEdit);
 
         lineEdit_2 = new QLineEdit(layoutWidget_2);
         lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
+        lineEdit_2->setEnabled(false);
 
         verticalLayout_2->addWidget(lineEdit_2);
 
@@ -111,12 +112,9 @@ public:
         groupBox_2 = new QGroupBox(groupBox);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         groupBox_2->setGeometry(QRect(0, 100, 297, 201));
-        listView = new QListView(groupBox_2);
-        listView->setObjectName(QStringLiteral("listView"));
-        listView->setGeometry(QRect(10, 20, 271, 181));
-        commandLinkButton = new QCommandLinkButton(groupBox_2);
-        commandLinkButton->setObjectName(QStringLiteral("commandLinkButton"));
-        commandLinkButton->setGeometry(QRect(10, 20, 291, 41));
+        tableWidget = new QTableWidget(groupBox_2);
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
+        tableWidget->setGeometry(QRect(20, 20, 256, 171));
 
         verticalLayout_3->addWidget(groupBox);
 
@@ -134,18 +132,18 @@ public:
 
         verticalLayout_8->addWidget(pushButton_3);
 
-        widget = new QWidget(profil_miejsca);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(330, 30, 311, 101));
-        verticalLayout_4 = new QVBoxLayout(widget);
+        layoutWidget1 = new QWidget(profil_miejsca);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(330, 30, 311, 101));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget1);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
-        commandLinkButton_2 = new QCommandLinkButton(widget);
+        commandLinkButton_2 = new QCommandLinkButton(layoutWidget1);
         commandLinkButton_2->setObjectName(QStringLiteral("commandLinkButton_2"));
 
         verticalLayout_4->addWidget(commandLinkButton_2);
 
-        commandLinkButton_3 = new QCommandLinkButton(widget);
+        commandLinkButton_3 = new QCommandLinkButton(layoutWidget1);
         commandLinkButton_3->setObjectName(QStringLiteral("commandLinkButton_3"));
 
         verticalLayout_4->addWidget(commandLinkButton_3);
@@ -163,10 +161,9 @@ public:
         label_2->setText(QApplication::translate("profil_miejsca", "Nazwa", 0));
         label->setText(QApplication::translate("profil_miejsca", "Miasto", 0));
         groupBox_2->setTitle(QApplication::translate("profil_miejsca", "Cennik", 0));
-        commandLinkButton->setText(QApplication::translate("profil_miejsca", "Dyscyplina i cena", 0));
         pushButton_3->setText(QApplication::translate("profil_miejsca", "Powr\303\263t", 0));
-        commandLinkButton_2->setText(QApplication::translate("profil_miejsca", "Usu\305\204 miejsce rozgrywek (opiekun)", 0));
-        commandLinkButton_3->setText(QApplication::translate("profil_miejsca", "Edytuj miejsce rozgrywek (opiekun)", 0));
+        commandLinkButton_2->setText(QApplication::translate("profil_miejsca", "Usu\305\204 miejsce rozgrywek", 0));
+        commandLinkButton_3->setText(QApplication::translate("profil_miejsca", "Edytuj miejsce rozgrywek", 0));
     } // retranslateUi
 
 };

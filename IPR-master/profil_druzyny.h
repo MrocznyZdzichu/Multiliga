@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "CDruzyna.h"
+#include "CZaproszenieLiga.h"
 
 namespace Ui {
 class profil_druzyny;
@@ -16,6 +17,7 @@ public:
     profil_druzyny(QWidget *parent, std::string jsonname);
     explicit profil_druzyny(QWidget *parent = nullptr);
     std::string jsonname;
+    std::vector<CZaproszenieLiga*> zaproszeniaDruzynDoLig;
     ~profil_druzyny();
 
 private slots:

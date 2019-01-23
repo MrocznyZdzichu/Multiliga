@@ -16,10 +16,8 @@ class CZaproszenieLiga
 {
 
 public:
-	CZaproszenieLiga();
+    CZaproszenieLiga(std::string nazwaDruzyny, std::string nazwaLigi);
 	virtual ~CZaproszenieLiga();
-	CLiga *m_CLiga;
-	CDruzyna *m_CDruzyna;
 
 private:
     QDateTime dataUtworzenia;

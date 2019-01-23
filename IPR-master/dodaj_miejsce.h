@@ -4,6 +4,8 @@
 #include <QDialog>
 #include "CListaMiast.h"
 #include "CListaDyscyplin.h"
+#include "profil_miejsca.h"
+
 namespace Ui {
 class dodaj_miejsce;
 }
@@ -15,6 +17,7 @@ class dodaj_miejsce : public QDialog
 public:
     explicit dodaj_miejsce(QWidget *parent = nullptr);
     ~dodaj_miejsce();
+    profil_miejsca* wyswietlenieMiejsca;
 
 private slots:
     void on_pushButton_3_clicked();
