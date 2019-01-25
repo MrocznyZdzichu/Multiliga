@@ -6,9 +6,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    logowanie w;
+    logowanie* w;
+    w = new logowanie;
     strona_glowna_opiekun w1;
-    w.show();
-    QObject::connect(&w, SIGNAL(destroyed()),&w1,SLOT(open()));
+    QObject::connect(w, SIGNAL(destroyed()),&w1,SLOT(open()));
+    w->show();
     return a.exec();
 }

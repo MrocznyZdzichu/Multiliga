@@ -31,18 +31,16 @@ public:
     }
 	virtual ~CRest();
 
-    std::string candidate_login;
-    std::string candidate_pwd;
+    std::string podany_mail;
+    std::string podane_haslo;
 
     Document object0JSon;
     std::string current_json;
     std::string object_id;
-
-    CUzytkownik* logged_user;
-
+    CUzytkownik* zalogowany_uzytkownik;
     void getJSon(std::string filename, bool& fileExist);
     void getJSon(bool& fileExist);
-    Document getJSonAndPass(std::string filename, bool& fileExist);
+    Document wez_json_i_przekaz(std::string filename, bool& fileExist);
 
     bool sprawdz_haslo(std::string providedPwd);
     bool sprawdz_login();
@@ -54,13 +52,14 @@ public:
     void dodaj_lige();
     void dodaj_dyscypline();
     void dodaj_oplate();
+    void dodaj_zaproszenie_do_ligi_druzynowej();
 
+    std::string sprawdz_uzytkownika(bool& czyHasloPoprawne);
     Document odbierz_druzyny();
 
 private:
     CRest();
     CRest(const CRest& );
-
 
     void dodaj_do_listy_miejsc(std::fstream &listamiejsc);
     void dodaj_plik_z_miejscem(std::fstream& plik_z_miejscem);
@@ -73,11 +72,8 @@ signals:
     void wrongPassword(QString comm);
     void fileNotFound(QString comm);
 
-    void addGamingPlaceResult (QString comm);
-    void updateGamingPlaces();
-
-    void addLeagueResult(QString comm);
-    void updateLeagues();
+    void aktualizuj_zarzadzaj_miejscami();
+    void aktualizuj_ligi();
 
 
 };

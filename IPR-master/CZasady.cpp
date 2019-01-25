@@ -17,7 +17,7 @@ CZasady::~CZasady()
 
 }
 
-Document CZasady::deserializuj(std::string jsonname)
+Document CZasady::pobierz_dane(std::string jsonname)
 {
 
 }

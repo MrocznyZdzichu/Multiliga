@@ -18,11 +18,11 @@ CLiga::~CLiga()
 
 }
 
-Document CLiga::deserializuj(std::string jsonname)
+Document CLiga::pobierz_dane(std::string jsonname)
 {
     bool flag;
     jsonname += ".json";
-    Document d = CRest::getRest().getJSonAndPass(jsonname, flag);
+    Document d = CRest::getRest().wez_json_i_przekaz(jsonname, flag);
     if (flag)
         return d;
     else
@@ -31,41 +31,41 @@ Document CLiga::deserializuj(std::string jsonname)
 
 void CLiga::serializuj()
 {
-    this->JSonString = "";
-    this->JSonString += "{\"nazwa\": \"";
-    this->JSonString += this->nazwaLigi;
-    this->JSonString += "\", \"dyscyplina\": \"";
-    this->JSonString += this->dyscyplinaLigi->nazwaDyscypliny;
-    this->JSonString += "\", \"poziom ligi\": ";
-    this->JSonString += std::to_string(this->poziomLigi);
-    this->JSonString += ", \"sezon\": \"";
-    this->JSonString += this->sezon;
-    this->JSonString += "\", \"miasto\": \"";
-    this->JSonString += this->miastoLigi->nazwaMiasta;
-    this->JSonString += "\", \"organizator\": {\"email\": \"";
-    this->JSonString += this->opiekunLigi->getEmail();
-    this->JSonString += "\", \"imie\": \"";
-    this->JSonString += this->opiekunLigi->getImie();
-    this->JSonString += "\", \"nazwisko\": \"";
-    this->JSonString += this->opiekunLigi->getNaziwsko();
-    this->JSonString += "\"}, \"zasady\": {\"liczba kolejek\": ";
-    this->JSonString += std::to_string(this->zasadyLigi->liczbaKolejek);
-    this->JSonString += ", \"liczba meczy na kolejke\": ";
-    this->JSonString += std::to_string(this->zasadyLigi->liczbaMeczy);
-    this->JSonString += ", \"liczebnosc druzyn\": ";
-    this->JSonString += std::to_string(this->zasadyLigi->liczebnoscDruzyn);
-    this->JSonString += ", \"liczba podmeczy\": ";
-    this->JSonString += std::to_string(this->zasadyLigi->liczbaPodmeczy);
-    this->JSonString += ", \"czas trwania podmeczu\": ";
-    this->JSonString += std::to_string(this->zasadyLigi->czasPodmeczu);
-    this->JSonString += ", \"liczba punktow do zwyciestwa\": ";
-    this->JSonString += std::to_string(this->zasadyLigi->limitPunktow);
-    this->JSonString += "}}";
+    this->json_do_wyslania = "";
+    this->json_do_wyslania += "{\"nazwa\": \"";
+    this->json_do_wyslania += this->nazwaLigi;
+    this->json_do_wyslania += "\", \"dyscyplina\": \"";
+    this->json_do_wyslania += this->dyscyplinaLigi->nazwaDyscypliny;
+    this->json_do_wyslania += "\", \"poziom ligi\": ";
+    this->json_do_wyslania += std::to_string(this->poziomLigi);
+    this->json_do_wyslania += ", \"sezon\": \"";
+    this->json_do_wyslania += this->sezon;
+    this->json_do_wyslania += "\", \"miasto\": \"";
+    this->json_do_wyslania += this->miastoLigi->nazwaMiasta;
+    this->json_do_wyslania += "\", \"organizator\": {\"email\": \"";
+    this->json_do_wyslania += this->opiekunLigi->getEmail();
+    this->json_do_wyslania += "\", \"imie\": \"";
+    this->json_do_wyslania += this->opiekunLigi->getImie();
+    this->json_do_wyslania += "\", \"nazwisko\": \"";
+    this->json_do_wyslania += this->opiekunLigi->getNazwisko();
+    this->json_do_wyslania += "\"}, \"zasady\": {\"liczba kolejek\": ";
+    this->json_do_wyslania += std::to_string(this->zasadyLigi->liczbaKolejek);
+    this->json_do_wyslania += ", \"liczba meczy na kolejke\": ";
+    this->json_do_wyslania += std::to_string(this->zasadyLigi->liczbaMeczy);
+    this->json_do_wyslania += ", \"liczebnosc druzyn\": ";
+    this->json_do_wyslania += std::to_string(this->zasadyLigi->liczebnoscDruzyn);
+    this->json_do_wyslania += ", \"liczba podmeczy\": ";
+    this->json_do_wyslania += std::to_string(this->zasadyLigi->liczbaPodmeczy);
+    this->json_do_wyslania += ", \"czas trwania podmeczu\": ";
+    this->json_do_wyslania += std::to_string(this->zasadyLigi->czasPodmeczu);
+    this->json_do_wyslania += ", \"liczba punktow do zwyciestwa\": ";
+    this->json_do_wyslania += std::to_string(this->zasadyLigi->limitPunktow);
+    this->json_do_wyslania += "}}";
 
 }
 
 void CLiga::wyslij_siebie()
 {
-    CRest::getRest().current_json = this->JSonString;
+    CRest::getRest().current_json = this->json_do_wyslania;
     CRest::getRest().object_id = this->nazwaLigi;
 }

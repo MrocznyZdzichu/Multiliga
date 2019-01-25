@@ -22,15 +22,9 @@ public:
 	CGracz();
 	virtual ~CGracz();
 
-	CKarnet *m_CKarnet;
-	CNagroda *m_CNagroda;
-
-    std::string imie;
-    std::string nazwisko;
-
     void wyslij_siebie();
     void serializuj();
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
 
 };
 #endif // !defined(EA_1481BA45_62A5_407b_A3FD_BB2DB47D39AD__INCLUDED_)

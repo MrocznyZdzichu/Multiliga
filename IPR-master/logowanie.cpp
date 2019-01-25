@@ -3,10 +3,11 @@
 #include "CUzytkownik.h"
 #include "COpiekun.h"
 #include "globalUser.h"
+#include "CRest.h"
+#include "strona_glowna_opiekun.h"
 #include "rapidjson-master/rapidjson-master/include/rapidjson/document.h"
 #include "rapidjson-master/rapidjson-master/include/rapidjson/filereadstream.h"
-#include "rapidjson-master/rapidjson-master/include/rapidjson/document.h"
-#include "CRest.h"
+
 using namespace rapidjson;
 logowanie::logowanie(QWidget *parent) :
     QMainWindow(parent),
@@ -26,36 +27,29 @@ std::string shortenMail(std::string originMail);
 void logowanie::on_pushButton_clicked()
 {
     QString email = ui->lineEdit->text();
-    std::string queryEmail = email.toStdString();
-    QString haslo = ui->lineEdit_2->text();
-    std::string queryHaslo = haslo.toStdString();
+    std::string podany_mail = email.toStdString();
+    std::string haslo = ui->lineEdit_2->text().toStdString();
 
-    CUzytkownik* user = new CUzytkownik(queryEmail, queryHaslo);
+    CUzytkownik* user = new CUzytkownik(podany_mail, haslo);
     user->wyslij_siebie();
 
-    bool fileExist;
-    CRest::getRest().getJSon(fileExist);
-    if (!fileExist)
-        return;
-
-    bool isPwdValid = CRest::getRest().sprawdz_haslo(queryHaslo);
-    switch (isPwdValid)
+    bool czyHasloPoprawne = false;
+    std::string poziom_uprawnien = CRest::getRest().sprawdz_uzytkownika(czyHasloPoprawne);
+    if (czyHasloPoprawne)
     {
-    case 0:
-        ui->label_5->setText(QString::fromStdString("Wprowadzono błędne hasło"));
-        break;
-    case 1:
-        std::string poziom_uprawnien = CRest::getRest().sprawdz_uprawnienia();
         if (poziom_uprawnien == "opiekun")
         {
-            CRest::getRest().logInOpiekun();
-            this->destroy();
-            emit destroyed();
+            delete this;
+            return;
         }
-        break;
     }
 }
 void logowanie::wrongEmail()
 {
     ui->label_5->setText(QString::fromStdString("Wprowadzono błędny e-mail"));
+}
+
+void logowanie::dane_niepoprawne()
+{
+    this->ui->label_5->setText("Dane niepoprawne");
 }

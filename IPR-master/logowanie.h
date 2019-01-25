@@ -18,6 +18,7 @@ public:
 private slots:
     void on_pushButton_clicked();
     void wrongEmail();
+    void dane_niepoprawne();
 
 private:
     Ui::logowanie *ui;

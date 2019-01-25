@@ -21,7 +21,7 @@ public:
     std::list<CDyscyplina> listaDsycyplin;
 
     void serializuj ();
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
     void wyslij_siebie();
 
 };

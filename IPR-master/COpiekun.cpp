@@ -28,7 +28,7 @@ COpiekun::COpiekun(std::string imie, std::string nazwisko, std::string email, st
     this->haslo = haslo;
 }
 
-Document COpiekun::deserializuj(std::string jsonname)
+Document COpiekun::pobierz_dane(std::string jsonname)
 {
 
 }

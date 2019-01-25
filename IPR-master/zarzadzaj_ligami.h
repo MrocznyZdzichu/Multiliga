@@ -20,10 +20,9 @@ public:
 private slots:
     void on_commandLinkButton_clicked();
 
-    void update();
+    void aktualizuj();
     void wczytaj_dane();
     void fileNotFound(QString comm);
-
     void on_pushButton_3_clicked();
 
 private:

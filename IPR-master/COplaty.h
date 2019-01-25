@@ -20,7 +20,7 @@ public:
 
     void wyslij_siebie();
     void serializuj();
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
 };
 
 #endif // COPLATY_H

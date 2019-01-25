@@ -24,7 +24,7 @@ public:
     std::deque<CLiga*> listaLig;
     Document listaLigDOM;
 
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
     void serializuj();
     void wyslij_siebie();
 

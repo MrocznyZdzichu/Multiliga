@@ -27,7 +27,7 @@ public:
     unsigned int czasPodmeczu;
     unsigned int limitPunktow;
 
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
     void serializuj();
     void wyslij_siebie();
 };

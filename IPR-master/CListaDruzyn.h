@@ -32,9 +32,10 @@ public:
 
     void serializuj();
     void wyslij_siebie();
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
+    CDruzyna* zwroc_druzyne(std::string nazwa_druzyny);
 
-    void serializujSzukane();
+    void serializuj_szukane();
     Document deserializujSzukane(std::string jsonname);
 private:
 

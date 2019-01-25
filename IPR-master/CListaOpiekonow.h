@@ -14,7 +14,7 @@ public:
 
     Document ListaOpiekunowDOM;
     std::list<COpiekun*> listaOpiekunow;
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
     void serializuj();
     void wyslij_siebie();
 };

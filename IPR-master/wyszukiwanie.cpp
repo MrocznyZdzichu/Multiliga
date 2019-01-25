@@ -24,5 +24,4 @@ void wyszukiwanie::on_wyszukiwanie_druzyn_clicked()
 {
     wyszukaj_druzyne* searchTeam;
     searchTeam = new wyszukaj_druzyne(this);
-    searchTeam->open();
 }

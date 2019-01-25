@@ -98,7 +98,7 @@
                  <widget class="QComboBox" name="comboBox_2"/>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBox"/>
+                 <widget class="QLineEdit" name="lineEdit_2"/>
                 </item>
                 <item>
                  <widget class="QComboBox" name="comboBox_3"/>
@@ -116,7 +116,7 @@
           <item>
            <widget class="QGroupBox" name="groupBox_3">
             <property name="title">
-             <string>Dodaj dyscyplinę i opłatę</string>
+             <string>Dodaj nową dyscyplinę</string>
             </property>
             <widget class="QWidget" name="layoutWidget_3">
              <property name="geometry">
@@ -137,22 +137,12 @@
                   </property>
                  </widget>
                 </item>
-                <item>
-                 <widget class="QLabel" name="label_5">
-                  <property name="text">
-                   <string>Opłata</string>
-                  </property>
-                 </widget>
-                </item>
                </layout>
               </item>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_6">
                 <item>
                  <widget class="QLineEdit" name="lineEdit_4"/>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="lineEdit_2"/>
                 </item>
                </layout>
               </item>
@@ -163,7 +153,7 @@
           <item>
            <widget class="QPushButton" name="pushButton_2">
             <property name="text">
-             <string>Dodaj dyscyplinę i opłatę</string>
+             <string>Dodaj dyscyplinę</string>
             </property>
            </widget>
           </item>
@@ -222,28 +212,6 @@
        <string>Dodaj miejsce rozgrywek</string>
       </property>
      </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>400</y>
-     <width>311</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_4">
-    <item>
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Potwierdź hasłem</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="lineEdit_3"/>
     </item>
    </layout>
   </widget>

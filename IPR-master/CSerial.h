@@ -17,9 +17,9 @@ class CSerial
 public:
 	CSerial();
 	virtual ~CSerial();
-    std::string JSonString;
+    std::string json_do_wyslania;
 
-    virtual rapidjson::Document deserializuj(std::string jsonname) = 0;
+    virtual rapidjson::Document pobierz_dane(std::string jsonname) = 0;
     virtual void serializuj() = 0;
     virtual void wyslij_siebie() = 0;
 

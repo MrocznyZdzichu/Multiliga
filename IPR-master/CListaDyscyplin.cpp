@@ -25,10 +25,10 @@ void CListaDyscyplin::serializuj()
 
 }
 
-Document CListaDyscyplin::deserializuj(std::string jsonname)
+Document CListaDyscyplin::pobierz_dane(std::string jsonname)
 {
     bool flag;
-    Document d = CRest::getRest().getJSonAndPass(jsonname.c_str(), flag);
+    Document d = CRest::getRest().wez_json_i_przekaz(jsonname.c_str(), flag);
     if (flag)
         return d;
 }

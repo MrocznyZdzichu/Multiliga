@@ -13,6 +13,11 @@ CDyscyplina::CDyscyplina()
 
 }
 
+CDyscyplina::CDyscyplina(std::string nazwa_dyscypliny)
+{
+    this->nazwaDyscypliny = nazwa_dyscypliny;
+}
+
 CDyscyplina::~CDyscyplina()
 {
 
@@ -20,17 +25,17 @@ CDyscyplina::~CDyscyplina()
 
 void CDyscyplina::serializuj()
 {
-    this->JSonString = "\"";
-    this->JSonString += this->nazwaDyscypliny;
-    this->JSonString += "\"";
+    this->json_do_wyslania = "\"";
+    this->json_do_wyslania += this->nazwaDyscypliny;
+    this->json_do_wyslania += "\"";
 }
 
-Document CDyscyplina::deserializuj(std::string jsonname)
+Document CDyscyplina::pobierz_dane(std::string jsonname)
 {
 
 }
 
 void CDyscyplina::wyslij_siebie()
 {
-    CRest::getRest().current_json = this->JSonString;
+    CRest::getRest().current_json = this->json_do_wyslania;
 }

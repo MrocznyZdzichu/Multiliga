@@ -27,7 +27,7 @@ void CGracz::serializuj()
 
 }
 
-Document CGracz::deserializuj(std::string jsonname)
+Document CGracz::pobierz_dane(std::string jsonname)
 {
 
 }

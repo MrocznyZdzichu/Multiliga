@@ -25,7 +25,7 @@ void CMiasto::serializuj()
 
 }
 
-Document CMiasto::deserializuj(std::string jsonname)
+Document CMiasto::pobierz_dane(std::string jsonname)
 {
 
 }

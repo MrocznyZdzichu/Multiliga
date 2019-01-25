@@ -1,13 +1,14 @@
 #include "profil_ligi.h"
 #include "ui_profil_ligi.h"
 
-profil_ligi::profil_ligi(QWidget *parent, std::string nazwaLigi) :
+profil_ligi::profil_ligi(CLiga* nowaLiga, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::profil_ligi)
 {
-    this->nazwaLigi = nazwaLigi;
+    this->nazwaLigi = nowaLiga->nazwaLigi;
     ui->setupUi(this);
     this->wczytaj_dane();
+    this->open();
 }
 
 profil_ligi::~profil_ligi()
@@ -19,7 +20,7 @@ void profil_ligi::wczytaj_dane()
 {
     CLiga* wyswietlanaLiga = new CLiga;
 
-    Document d = wyswietlanaLiga->deserializuj(this->nazwaLigi);
+    Document d = wyswietlanaLiga->pobierz_dane(this->nazwaLigi);
 
     std::string text1 = "Nazwa: ";
     text1 += d["nazwa"].GetString();

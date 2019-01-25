@@ -92,7 +92,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Zmień zasady ligi)</string>
+    <string>Zmień zasady ligi</string>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox_5">

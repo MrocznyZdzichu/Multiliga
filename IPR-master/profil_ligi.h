@@ -15,7 +15,7 @@ class profil_ligi : public QDialog
     Q_OBJECT
 
 public:
-    explicit profil_ligi(QWidget *parent = nullptr, std::string nazwaLigi = "");
+    explicit profil_ligi(CLiga* nazwaLigi, QWidget *parent = nullptr);
     ~profil_ligi();
     std::string nazwaLigi;
 

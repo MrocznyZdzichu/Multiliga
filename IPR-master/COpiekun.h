@@ -20,7 +20,7 @@ public:
     COpiekun(std::string imie, std::string nazwisko, std::string email, std::string haslo);
 	virtual ~COpiekun();
 
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
     void wyslij_siebie();
     void serializuj();
 

@@ -36,7 +36,7 @@ public:
 
     Document ligaDOM;
 
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
     void serializuj();
     void wyslij_siebie();
 

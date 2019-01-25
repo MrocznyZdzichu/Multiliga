@@ -23,7 +23,7 @@ public:
     std::string nazwaMiasta;
 
     void serializuj();
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
     void wyslij_siebie();
 };
 #endif // !defined(EA_1CA5B091_EA8E_4be2_8A59_B6661761C690__INCLUDED_)

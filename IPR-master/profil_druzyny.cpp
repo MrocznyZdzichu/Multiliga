@@ -2,13 +2,24 @@
 #include "ui_profil_druzyny.h"
 #include "CListaLig.h"
 
-profil_druzyny::profil_druzyny(QWidget *parent, std::string jsonname) :
+profil_druzyny::profil_druzyny(QWidget *parent, CDruzyna* wyszukana_druzyna) :
     QDialog(parent),
     ui(new Ui::profil_druzyny)
 {
-    this->jsonname = jsonname;
+    this->wyszukana_druzyna = wyszukana_druzyna;
     ui->setupUi(this);
-    this->wczytaj_dane();
+    this->wczytaj_ligi();
+    this->wyswietl_druzyne();
+    if (this->czy_nalezy_do_ligi())
+    {
+
+    }
+    else
+    {
+        this->aktywuj_przycisk_zapraszania_i_zablokuj_usuwania();
+    }
+
+
 }
 
 profil_druzyny::~profil_druzyny()
@@ -23,179 +34,100 @@ void profil_druzyny::on_pushButton_clicked()
 
 void parsujZawodnikow(const Document& DOM, std::string& imie, std::string& nazwisko, std::string rawString,
                       std::vector<std::string>& imiona, std::vector<std::string>& nazwiska);
-void profil_druzyny::wczytaj_dane()
+void profil_druzyny::wyswietl_druzyne()
 {
-    CDruzyna* wyswietlanaDruzyna = new CDruzyna;
-    wyswietlanaDruzyna->druzynaDOM = wyswietlanaDruzyna->deserializuj(jsonname);
+    std::string t1 = "Nazwa: ";
+    t1 += this->wyszukana_druzyna->nazwa;
+    this->ui->label->setText(QString::fromStdString(t1));
 
-    std::string imie = "";
-    std::string nazwisko = "";
-    std::vector<std::string> imiona;
-    std::vector<std::string> nazwiska;
-    std::string rawString;
+    t1 = "Dyscyplina: ";
+    t1 += this->wyszukana_druzyna->dyscyplina->nazwaDyscypliny;
+    this->ui->label_6->setText(QString::fromStdString(t1));
 
-    parsujZawodnikow(wyswietlanaDruzyna->druzynaDOM, imie, nazwisko, rawString, imiona, nazwiska);
-    this->ustawWidgety(wyswietlanaDruzyna->druzynaDOM);
+    t1 = "Kapitan: ";
+    t1 += this->wyszukana_druzyna->graczeDruzyny[0]->getImie();
+    t1 += " ";
+    t1 += this->wyszukana_druzyna->graczeDruzyny[0]->getNazwisko();
+    this->ui->label_2->setText(QString::fromStdString(t1));
 
-    CListaLig* availableLeagues = new CListaLig();
-    availableLeagues->listaLigDOM = availableLeagues->deserializuj("listaLig.json");
+    t1 = "opis: ";
+    t1 += this->wyszukana_druzyna->opis;
+    this->ui->label_3->setText(QString::fromStdString(t1));
 
-    if (availableLeagues->listaLigDOM != NULL)
-    {
-        for (auto& i : availableLeagues->listaLigDOM["listaLig"].GetArray())
-        {
-            this->ui->comboBox->addItem(QString::fromStdString(i["nazwa"].GetString()));
-        }
-    }
+    t1 = "Uczestniczy w: ";
+    t1 += this->wyszukana_druzyna->liga->nazwaLigi;
+    this->ui->label_4->setText(QString::fromStdString(t1));
 
-    if (wyswietlanaDruzyna->druzynaDOM["liga"] == "brak")
-    {
-        this->ui->pushButton_5->setEnabled(0);
-        this->ui->pushButton_4->setEnabled(1);
-    }
-    else
-    {
-        this->ui->pushButton_4->setEnabled(0);
-        this->ui->pushButton_5->setEnabled(1);
-    }
-}
-void parsujZawodnikow(const Document &DOM, std::string &imie, std::string &nazwisko, std::string rawString,
-                      std::vector<std::string> &imiona, std::vector<std::string> &nazwiska)
-{
-    for (auto& gracz : DOM["gracze"].GetArray())
-    {
-        imie = "";
-        nazwisko = "";
-        rawString = gracz.GetString();
-        int trigger = 0;
-        for (auto sign : rawString)
-        {
-            if (sign == ' ')
-            {
-                trigger++;
-                continue;
-            }
-            switch (trigger)
-            {
-            case 0:
-                imie += sign;
-                break;
+    t1 = "Poprzednie uczestniczyła w: ";
+    t1 += this->wyszukana_druzyna->poprzednia_liga->nazwaLigi;
+    this->ui->label_7->setText(QString::fromStdString(t1));
 
-            case 1:
-                nazwisko += sign;
-                break;
-            }
-        }
-        imiona.push_back(imie);
-        nazwiska.push_back(nazwisko);
-    }
-}
+    t1 = "Osiagniecia: ";
+    t1 += this->wyszukana_druzyna->osiagniecia;
+    this->ui->label_5->setText(QString::fromStdString(t1));
 
-void profil_druzyny::ustawWidgety (const Document& d)
-{
-    std::string nazwa = "Nazwa: ";
-    nazwa += d["nazwa"].GetString();
-    this->ui->label->setText(QString::fromStdString(nazwa));
-
-    nazwa = "Dyscyplina: ";
-    nazwa += d["dyscyplina"].GetString();
-    this->ui->label_6->setText(QString::fromStdString(nazwa));
-
-    nazwa = "Kapitan: ";
-    nazwa += d["gracze"][0].GetString();
-    this->ui->label_2->setText(QString::fromStdString(nazwa));
-
-    nazwa = "Opis: ";
-    nazwa += d["opis"].GetString();
-    this->ui->label_3->setText(QString::fromStdString(nazwa));
-
-    nazwa = "Uczestniczy w lidze: ";
-    nazwa += d["liga"].GetString();
-    this->ui->label_4->setText(QString::fromStdString(nazwa));
-
-    nazwa = "Poprzednia liga: ";
-    nazwa += d["poprzednia liga"].GetString();
-    this->ui->label_7->setText(QString::fromStdString(nazwa));
-
-    nazwa = "Osiągniecia: ";
-    nazwa += d["osiagniecia"].GetString();
-    this->ui->label_5->setText(QString::fromStdString(nazwa));
-
-    this->ustawTabele(d);
-}
-
-void profil_druzyny::ustawTabele(const Document &d)
-{
     this->ui->tableWidget->setColumnCount(3);
-    int rowCount = 0;
-    for (auto& liczbaGraczy : d["gracze"].GetArray())
-        rowCount++;
-    this->ui->tableWidget->setRowCount(rowCount);
-
-    std::string imie = "";
-    std::string nazwisko = "";
-    std::vector<std::string> imiona;
-    std::vector<std::string> nazwiska;
-    std::string rawString;
-    parsujZawodnikow(d, imie, nazwisko, rawString, imiona, nazwiska);
-
+    this->ui->tableWidget->setRowCount(this->wyszukana_druzyna->graczeDruzyny.size());
     QStringList naglowki;
     naglowki << "Imie";
     naglowki << "Nazwisko";
     naglowki << "";
     this->ui->tableWidget->setHorizontalHeaderLabels(naglowki);
-
-    int rowNumber = 0;
-    int colNumber = 0;
-    for (int i = 0; i < rowCount; i++)
+    for (int i = 0; i < ui->tableWidget->rowCount(); i++)
     {
-        this->ui->tableWidget->setItem(rowNumber, colNumber,
-                                       new QTableWidgetItem(QString::fromStdString(
-                                                                imiona[rowNumber])));
-        colNumber++;
-
-        this->ui->tableWidget->setItem(rowNumber, colNumber,
-                                       new QTableWidgetItem(QString::fromStdString(
-                                                                nazwiska[rowNumber])));
-
-        if (rowNumber == 0)
-        {
-            colNumber++;
-            this->ui->tableWidget->setItem(rowNumber, colNumber,
-                                           new QTableWidgetItem(QString::fromStdString(
-                                                                    "Kapitan")));
-        }
+        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(this->wyszukana_druzyna->graczeDruzyny[i]->getImie())));
+        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(this->wyszukana_druzyna->graczeDruzyny[i]->getNazwisko())));
+        if (i == 0)
+            ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString::fromStdString("Kapitan")));
         else
-        {
-            colNumber++;
-            this->ui->tableWidget->setItem(rowNumber, colNumber,
-                                           new QTableWidgetItem(QString::fromStdString(
-                                                                    "Członek")));
-        }
+            ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString::fromStdString("Czlonek")));
+    }
 
-        rowNumber++;
-        colNumber = 0;
+}
+void profil_druzyny::on_pushButton_4_clicked()
+{
+    std::string nazwa_druzyny, nazwa_ligi;
+    nazwa_druzyny = this->wyszukana_druzyna->nazwa;
+    nazwa_ligi = this->ui->comboBox->currentText().toStdString();
+    CZaproszenieLiga* zaproszenie = new CZaproszenieLiga(nazwa_druzyny, nazwa_ligi);
+
+    zaproszenie->serializuj();
+    zaproszenie->wyslij_siebie();
+
+    CRest::getRest().dodaj_zaproszenie_do_ligi_druzynowej();
+    this->zablokuj_przycisk_zapraszania();
+}
+
+bool profil_druzyny::czy_nalezy_do_ligi()
+{
+    if (this->wyszukana_druzyna->liga->nazwaLigi == "brak")
+    {
+        return false;
+    }
+    else
+    {
+        return true;
     }
 }
 
-void profil_druzyny::on_pushButton_4_clicked()
+void profil_druzyny::aktywuj_przycisk_zapraszania_i_zablokuj_usuwania()
 {
-    std::string nazwaDruzyny = "";
-    std::string nazwaLigi = "";
-    std::string labelText;
-    std::string comboText;
+    ui->pushButton_4->setEnabled(1);
+    ui->pushButton_5->setEnabled(0);
+}
 
-    labelText = ui->label->text().toStdString();
-    comboText = ui->comboBox->currentText().toStdString();
-
-    for (int i = 7; i < labelText.size(); i++)
-        nazwaDruzyny += labelText[i];
-
-    nazwaLigi = comboText;
-
-    CZaproszenieLiga* zaproszenie = new CZaproszenieLiga(nazwaDruzyny, nazwaLigi);
-    zaproszeniaDruzynDoLig.push_back(zaproszenie);
-
+void profil_druzyny::zablokuj_przycisk_zapraszania()
+{
     ui->label_9->setText("Stworzono zaproszenie");
     ui->pushButton_4->setEnabled(0);
+}
+
+void profil_druzyny::wczytaj_ligi()
+{
+    bool czy_plik_istnieje;
+    Document d = CRest::getRest().wez_json_i_przekaz("listaLig.json", czy_plik_istnieje);
+    for (auto& liga : d["listaLig"].GetArray())
+    {
+        ui->comboBox->addItem(QString::fromStdString(liga["nazwa"].GetString()));
+    }
 }

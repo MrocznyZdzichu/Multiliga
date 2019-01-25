@@ -30,14 +30,14 @@ public:
     CMiasto* miasto;
     CDyscyplina* dyscyplina;
     std::vector<CGracz*> graczeDruzyny;
+    std::string opis;
+    CLiga* poprzednia_liga;
+    std::string osiagniecia;
 
-    Document druzynaDOM;
-
-    bool czy_nalezy_do_ligi();
-    bool czy_nazwa_unikalna();
+    CDruzyna* zwroc_druzyny(std::string nazwa_druzyny);
 
     void wyslij_siebie();
     void serializuj();
-    Document deserializuj(std::string jsonname);
+    Document pobierz_dane(std::string jsonname);
 };
 #endif // !defined(EA_00B30A6A_1E43_4068_99AB_5DD93131D379__INCLUDED_)

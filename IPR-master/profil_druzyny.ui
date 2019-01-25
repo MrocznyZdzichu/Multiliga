@@ -154,6 +154,9 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_4">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string>Zaproś do ligi</string>
       </property>

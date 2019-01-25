@@ -8,6 +8,7 @@ profil_miejsca::profil_miejsca(QWidget *parent, CMiejsce* miejsceRozgrywek) :
     this->miejsceRozgrywek = miejsceRozgrywek;
     ui->setupUi(this);
     this->wczytaj_dane();
+    this->open();
 }
 
 profil_miejsca::~profil_miejsca()
@@ -26,8 +27,8 @@ void profil_miejsca::wczytaj_dane()
     fileName += miejsceRozgrywek->getTown();
     fileName += ".json";
 
-    this->miejsceRozgrywek->deserializuj(fileName);
-    this->miejsceRozgrywek->miejsceDOM = this->miejsceRozgrywek->deserializuj(fileName);
+    this->miejsceRozgrywek->pobierz_dane(fileName);
+    this->miejsceRozgrywek->miejsceDOM = this->miejsceRozgrywek->pobierz_dane(fileName);
 
     this->ui->lineEdit->setText(QString::fromStdString(this->miejsceRozgrywek->miejsceDOM["nazwa miejsca"].GetString()));
     this->ui->lineEdit_2->setText(QString::fromStdString(this->miejsceRozgrywek->miejsceDOM["miasto"].GetString()));

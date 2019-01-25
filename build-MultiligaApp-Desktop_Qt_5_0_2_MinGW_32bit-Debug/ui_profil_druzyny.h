@@ -143,6 +143,7 @@ public:
 
         pushButton_4 = new QPushButton(horizontalLayoutWidget);
         pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setEnabled(false);
 
         horizontalLayout->addWidget(pushButton_4);
 

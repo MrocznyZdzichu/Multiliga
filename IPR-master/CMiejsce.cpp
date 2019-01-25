@@ -29,44 +29,44 @@ CMiejsce::~CMiejsce()
 
 void CMiejsce::serializuj()
 {
-    this->JSonString = "";
-    this->JSonString+="{\"nazwa miejsca\": \"";
-    this->JSonString+=this->nazwa_miejsca;
-    this->JSonString+="\", \"miasto\": \"";
-    this->JSonString+=this->miasto;
-    this->JSonString+="\", \"dyscypliny\": [\"";
+    this->json_do_wyslania = "";
+    this->json_do_wyslania+="{\"nazwa miejsca\": \"";
+    this->json_do_wyslania+=this->nazwa_miejsca;
+    this->json_do_wyslania+="\", \"miasto\": \"";
+    this->json_do_wyslania+=this->miasto;
+    this->json_do_wyslania+="\", \"dyscypliny\": [\"";
     for (int i = 0; i < this->dyscypliny.size(); i++)
     {
-        this->JSonString+=this->dyscypliny[i];
+        this->json_do_wyslania+=this->dyscypliny[i];
         if (i != this->dyscypliny.size()-1)
-            this->JSonString+="\", \"";
+            this->json_do_wyslania+="\", \"";
         else
-            this->JSonString+="\"";
+            this->json_do_wyslania+="\"";
     }
-    this->JSonString+="], \"oplata\": [";
+    this->json_do_wyslania+="], \"oplata\": [";
     for (int i = 0; i < this->oplaty.size(); i++)
     {
-        this->JSonString+=std::to_string(this->oplaty[i]);
+        this->json_do_wyslania+=std::to_string(this->oplaty[i]);
         if (i != this->dyscypliny.size()-1)
-            this->JSonString+=", ";
+            this->json_do_wyslania+=", ";
         else
-            this->JSonString+="";
+            this->json_do_wyslania+="";
     }
-    this->JSonString+="]}";
+    this->json_do_wyslania+="]}";
 }
 void CMiejsce::wyslij_siebie()
 {
-    CRest::getRest().current_json = this->JSonString;
+    CRest::getRest().current_json = this->json_do_wyslania;
     std::string id = "";
     id += this->nazwa_miejsca;
     id += this->miasto;
     CRest::getRest().object_id = id;
 }
 
-Document CMiejsce::deserializuj(std::string jsonname)
+Document CMiejsce::pobierz_dane(std::string jsonname)
 {
     bool flag;
-    Document d = CRest::getRest().getJSonAndPass(jsonname.c_str(), flag);
+    Document d = CRest::getRest().wez_json_i_przekaz(jsonname.c_str(), flag);
     if (flag)
         return d;
 }

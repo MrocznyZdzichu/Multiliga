@@ -51,10 +51,6 @@ public:
     QLineEdit *lineEdit_25;
     QComboBox *comboBox_5;
     QComboBox *comboBox_4;
-    QWidget *layoutWidget_16;
-    QHBoxLayout *horizontalLayout_10;
-    QLabel *label_38;
-    QLineEdit *lineEdit_22;
     QGroupBox *groupBox_15;
     QComboBox *comboBox;
     QPushButton *pushButton;
@@ -94,10 +90,10 @@ public:
     {
         if (liga_dodaj->objectName().isEmpty())
             liga_dodaj->setObjectName(QStringLiteral("liga_dodaj"));
-        liga_dodaj->resize(681, 525);
+        liga_dodaj->resize(681, 500);
         pushButton_5 = new QPushButton(liga_dodaj);
         pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-        pushButton_5->setGeometry(QRect(30, 480, 341, 28));
+        pushButton_5->setGeometry(QRect(180, 460, 341, 28));
         layoutWidget_4 = new QWidget(liga_dodaj);
         layoutWidget_4->setObjectName(QStringLiteral("layoutWidget_4"));
         layoutWidget_4->setGeometry(QRect(370, 390, 291, 24));
@@ -192,22 +188,6 @@ public:
 
 
         horizontalLayout_11->addLayout(verticalLayout_21);
-
-        layoutWidget_16 = new QWidget(liga_dodaj);
-        layoutWidget_16->setObjectName(QStringLiteral("layoutWidget_16"));
-        layoutWidget_16->setGeometry(QRect(70, 450, 242, 24));
-        horizontalLayout_10 = new QHBoxLayout(layoutWidget_16);
-        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        label_38 = new QLabel(layoutWidget_16);
-        label_38->setObjectName(QStringLiteral("label_38"));
-
-        horizontalLayout_10->addWidget(label_38);
-
-        lineEdit_22 = new QLineEdit(layoutWidget_16);
-        lineEdit_22->setObjectName(QStringLiteral("lineEdit_22"));
-
-        horizontalLayout_10->addWidget(lineEdit_22);
 
         groupBox_15 = new QGroupBox(liga_dodaj);
         groupBox_15->setObjectName(QStringLiteral("groupBox_15"));
@@ -342,7 +322,7 @@ public:
 
         label_3 = new QLabel(liga_dodaj);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(400, 470, 261, 31));
+        label_3->setGeometry(QRect(120, 20, 261, 31));
 
         retranslateUi(liga_dodaj);
 
@@ -361,7 +341,6 @@ public:
         label_42->setText(QApplication::translate("liga_dodaj", "Sezon:", 0));
         label_43->setText(QApplication::translate("liga_dodaj", "Miasto", 0));
         label_44->setText(QApplication::translate("liga_dodaj", "Ogranizator", 0));
-        label_38->setText(QApplication::translate("liga_dodaj", "Wprowad\305\272 has\305\202o", 0));
         groupBox_15->setTitle(QApplication::translate("liga_dodaj", "Harmonogram", 0));
         pushButton->setText(QApplication::translate("liga_dodaj", "Edytuj kolejk\304\231", 0));
         pushButton_2->setText(QApplication::translate("liga_dodaj", "Usu\305\204 kolejk\304\231", 0));

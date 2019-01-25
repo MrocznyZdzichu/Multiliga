@@ -1,7 +1,1 @@
-{
-	"email": "abc@wp.pl",
-	"imie": "Jan",
-	"nazwisko": "Kowalski",
-	"haslo": "JK",
-	"level": "opiekun"
-}
+{"email": "abc@wp.pl", "imie": "Jan", "nazwisko": "Kowalski", "haslo": "JK", "level": "opiekun"}

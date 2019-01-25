@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>681</width>
-    <height>525</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>480</y>
+     <x>180</x>
+     <y>460</y>
      <width>341</width>
      <height>28</height>
     </rect>
@@ -140,28 +140,6 @@
      </item>
     </layout>
    </widget>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_16">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>450</y>
-     <width>242</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_10">
-    <item>
-     <widget class="QLabel" name="label_38">
-      <property name="text">
-       <string>Wprowadź hasło</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="lineEdit_22"/>
-    </item>
-   </layout>
   </widget>
   <widget class="QGroupBox" name="groupBox_15">
    <property name="geometry">
@@ -435,8 +413,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>470</y>
+     <x>120</x>
+     <y>20</y>
      <width>261</width>
      <height>31</height>
     </rect>

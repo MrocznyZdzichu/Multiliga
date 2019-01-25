@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_wyszukaj_druzyne_t {
     QByteArrayData data[10];
-    char stringdata[131];
+    char stringdata[140];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,15 +33,15 @@ QT_MOC_LITERAL(0, 0, 16),
 QT_MOC_LITERAL(1, 17, 12),
 QT_MOC_LITERAL(2, 30, 0),
 QT_MOC_LITERAL(3, 31, 23),
-QT_MOC_LITERAL(4, 55, 14),
-QT_MOC_LITERAL(5, 70, 13),
-QT_MOC_LITERAL(6, 84, 7),
-QT_MOC_LITERAL(7, 92, 26),
-QT_MOC_LITERAL(8, 119, 3),
-QT_MOC_LITERAL(9, 123, 6)
+QT_MOC_LITERAL(4, 55, 23),
+QT_MOC_LITERAL(5, 79, 13),
+QT_MOC_LITERAL(6, 93, 7),
+QT_MOC_LITERAL(7, 101, 26),
+QT_MOC_LITERAL(8, 128, 3),
+QT_MOC_LITERAL(9, 132, 6)
     },
     "wyszukaj_druzyne\0wczytaj_dane\0\0"
-    "on_pushButton_3_clicked\0wypisz_druzyny\0"
+    "on_pushButton_3_clicked\0druzyny_do_wyswietlenia\0"
     "CListaDruzyn*\0druzyny\0on_tableWidget_cellClicked\0"
     "row\0column\0"
 };
@@ -82,7 +82,7 @@ void wyszukaj_druzyne::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         switch (_id) {
         case 0: _t->wczytaj_dane(); break;
         case 1: _t->on_pushButton_3_clicked(); break;
-        case 2: _t->wypisz_druzyny((*reinterpret_cast< CListaDruzyn*(*)>(_a[1]))); break;
+        case 2: _t->druzyny_do_wyswietlenia((*reinterpret_cast< CListaDruzyn*(*)>(_a[1]))); break;
         case 3: _t->on_tableWidget_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }

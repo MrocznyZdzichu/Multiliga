@@ -176,7 +176,7 @@ public:
         groupBox_4->setTitle(QApplication::translate("profil_ligi", "Tabela:", 0));
         groupBox_3->setTitle(QApplication::translate("profil_ligi", "Nadchodz\304\205ce kolejki:", 0));
         groupBox_2->setTitle(QApplication::translate("profil_ligi", "Rozegrane kolejki:", 0));
-        commandLinkButton_2->setText(QApplication::translate("profil_ligi", "Zmie\305\204 zasady ligi)", 0));
+        commandLinkButton_2->setText(QApplication::translate("profil_ligi", "Zmie\305\204 zasady ligi", 0));
         groupBox_5->setTitle(QApplication::translate("profil_ligi", "Domy\305\233lne zasady:", 0));
         label_5->setText(QApplication::translate("profil_ligi", "Ilo\305\233\304\207 kolejek:", 0));
         label_6->setText(QApplication::translate("profil_ligi", "Ilo\305\233\304\207 meczy na kolejk\304\231:", 0));

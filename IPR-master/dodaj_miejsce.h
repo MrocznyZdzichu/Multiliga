@@ -28,6 +28,7 @@ private slots:
 
 private:
     Ui::dodaj_miejsce *ui;
+    void aktualizuj (CListaMiast* lista_miast, CListaDyscyplin* lista_dyscyplin);
 
 };
 

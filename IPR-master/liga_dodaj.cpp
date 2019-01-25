@@ -1,16 +1,14 @@
 #include "liga_dodaj.h"
 #include "ui_liga_dodaj.h"
 #include "globalUser.h"
+#include "CRest.h"
 liga_dodaj::liga_dodaj(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::liga_dodaj)
 {
-    connect(&CRest::getRest(), SIGNAL(wrongPassword(QString)), this, SLOT(wyswietlKomunikat(QString)));
-    connect(&CRest::getRest(), SIGNAL(fileNotFound(QString)), this, SLOT(wyswietlKomunikat(QString)));
-    connect(&CRest::getRest(), SIGNAL(addLeagueResult(QString)), this, SLOT(wyswietlKomunikat(QString)));
-
     ui->setupUi(this);
     this->wczytaj_dane();
+    this->open();
 }
 
 liga_dodaj::~liga_dodaj()
@@ -21,7 +19,7 @@ liga_dodaj::~liga_dodaj()
 void liga_dodaj::wczytaj_dane()
 {
     CListaDyscyplin* availableSports = new CListaDyscyplin;
-    availableSports->ListaDyscyplinDOM = availableSports->deserializuj("listadyscyplin.json");
+    availableSports->ListaDyscyplinDOM = availableSports->pobierz_dane("listadyscyplin.json");
 
     if (availableSports->ListaDyscyplinDOM != NULL)
     {
@@ -32,7 +30,7 @@ void liga_dodaj::wczytaj_dane()
     }
 
     CListaOpiekonow* availableOrganizators = new CListaOpiekonow;
-    availableOrganizators->ListaOpiekunowDOM = availableOrganizators->deserializuj("opiekunowie.json");
+    availableOrganizators->ListaOpiekunowDOM = availableOrganizators->pobierz_dane("opiekunowie.json");
 
     if (availableOrganizators->ListaOpiekunowDOM != NULL)
     {
@@ -50,7 +48,7 @@ void liga_dodaj::wczytaj_dane()
     }
 
     CListaMiast* availableTowns = new CListaMiast;
-    availableTowns->ListaMiastDOM = availableSports->deserializuj("listamiast.json");
+    availableTowns->ListaMiastDOM = availableSports->pobierz_dane("listamiast.json");
 
     if (availableTowns->ListaMiastDOM != NULL)
     {
@@ -67,44 +65,39 @@ void liga_dodaj::wyswietlKomunikat(QString comm)
 }
 
 void liga_dodaj::on_pushButton_5_clicked()
-{
-    if (ui->lineEdit_23->text() == "" || ui->lineEdit_24->text() == "" || ui->lineEdit_25->text() == "" ||
-        ui->comboBox_2->currentText() == "" || ui->comboBox_5->currentText() == "" || ui->lineEdit_16->text() == "" ||
-        ui->lineEdit_17->text() == "" || ui->comboBox_4->currentText() == "" || ui->lineEdit_18->text() == "" ||
-        ui->lineEdit_19->text() == "" || ui->lineEdit_20->text() == "" || ui->lineEdit_21->text() == "")
+{   
+    Dane dane_ligi;
+    dane_ligi.nazwa = ui->lineEdit_23->text().toStdString();
+    dane_ligi.poziom_ligi = ui->lineEdit_24->text().toInt();
+    dane_ligi.sezon = ui->lineEdit_25->text().toStdString();
+    dane_ligi.liczba_kolejek = ui->lineEdit_16->text().toInt();
+    dane_ligi.liczba_meczy_na_kolejke = ui->lineEdit_17->text().toInt();
+    dane_ligi.liczebnosc_druzyn = ui->lineEdit_18->text().toInt();
+    dane_ligi.liczba_podmeczy = ui->lineEdit_19->text().toInt();
+    dane_ligi.czas_trwania_podmeczu = ui->lineEdit_20->text().toInt();
+    dane_ligi.liczba_punktow_do_zwyciestwa = ui->lineEdit_21->text().toInt();
+    dane_ligi.dyscyplina = ui->comboBox_2->currentText().toStdString();
+    dane_ligi.miasto = ui->comboBox_5->currentText().toStdString();
+    dane_ligi.organizator = ui->comboBox_4->currentText().toStdString();
+
+    bool czyDanePoprawne = dane_ligi.czyPoprawne();
+    if (!czyDanePoprawne)
     {
-        ui->label_3->setText("Proszę wprowadzić wszystkie dane");
-        return;
-    }
-
-    CLiga* nowaLiga = new CLiga();
-    std::string providedPwd = ui->lineEdit_22->text().toStdString();
-
-    inicjalizuj_glowne_pola(nowaLiga);
-    inicjalizuj_zasady(nowaLiga);
-    inicjalizuj_opiekuna(nowaLiga);
-
-    if (CRest::getRest().logged_user->sprawdz_haslo(providedPwd))
-    {
-        bool isUnique = CRest::getRest().sprawdz_unikalnosc(nowaLiga->nazwaLigi);
-        if (isUnique)
-        {
-            nowaLiga->serializuj();
-            nowaLiga->wyslij_siebie();
-
-            CRest::getRest().dodaj_lige();
-            this->otworz_profil_ligi(nowaLiga->nazwaLigi);
-        }
-        else
-        {
-            ui->label_3->setText("Nazwa ligi musi być unikalna");
-        }
+        ui->label_3->setText("Dane niepoprawne");
+        return ;
     }
     else
     {
-        ui->label_3->setText("Wprowadzono niewłaściwe hasło");
-    }
+        CLiga* nowaLiga = new CLiga();
+        this->inicjalizacja(nowaLiga);
 
+        nowaLiga->serializuj();
+        nowaLiga->wyslij_siebie();
+
+        CRest::getRest().dodaj_lige();
+        profil_ligi* liga_info = new profil_ligi(nowaLiga, this);
+        ui->label_3->setText("Dodano nową ligę");
+    }
 }
 
 void liga_dodaj::inicjalizuj_glowne_pola(CLiga *nowaLiga)
@@ -168,8 +161,10 @@ void liga_dodaj::inicjalizuj_opiekuna(CLiga *nowaLiga)
     nowaLiga->opiekunLigi->setEmail(email);
 }
 
-void liga_dodaj::otworz_profil_ligi(std::string nazwaLigi)
+void liga_dodaj::inicjalizacja(CLiga *nowaLiga)
 {
-    profil_ligi* ligaInfo = new profil_ligi(this, nazwaLigi);
-    ligaInfo->open();
+    this->inicjalizuj_glowne_pola(nowaLiga);
+    this->inicjalizuj_opiekuna(nowaLiga);
+    this->inicjalizuj_zasady(nowaLiga);
 }
+

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CRest_t {
-    QByteArrayData data[10];
-    char stringdata[121];
+    QByteArrayData data[8];
+    char stringdata[98];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,15 +35,12 @@ QT_MOC_LITERAL(2, 17, 0),
 QT_MOC_LITERAL(3, 18, 13),
 QT_MOC_LITERAL(4, 32, 4),
 QT_MOC_LITERAL(5, 37, 12),
-QT_MOC_LITERAL(6, 50, 20),
-QT_MOC_LITERAL(7, 71, 18),
-QT_MOC_LITERAL(8, 90, 15),
-QT_MOC_LITERAL(9, 106, 13)
+QT_MOC_LITERAL(6, 50, 30),
+QT_MOC_LITERAL(7, 81, 15)
     },
     "CRest\0wrongLogin\0\0wrongPassword\0comm\0"
-    "fileNotFound\0addGamingPlaceResult\0"
-    "updateGamingPlaces\0addLeagueResult\0"
-    "updateLeagues\0"
+    "fileNotFound\0aktualizuj_zarzadzaj_miejscami\0"
+    "aktualizuj_ligi\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,29 +50,25 @@ static const uint qt_meta_data_CRest[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       7,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x05,
-       3,    1,   50,    2, 0x05,
-       5,    1,   53,    2, 0x05,
-       6,    1,   56,    2, 0x05,
-       7,    0,   59,    2, 0x05,
-       8,    1,   60,    2, 0x05,
-       9,    0,   63,    2, 0x05,
+       1,    0,   39,    2, 0x05,
+       3,    1,   40,    2, 0x05,
+       5,    1,   43,    2, 0x05,
+       6,    0,   46,    2, 0x05,
+       7,    0,   47,    2, 0x05,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void, QMetaType::QString,    4,
-    QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void,
 
        0        // eod
@@ -89,10 +82,8 @@ void CRest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 0: _t->wrongLogin(); break;
         case 1: _t->wrongPassword((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->fileNotFound((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->addGamingPlaceResult((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 4: _t->updateGamingPlaces(); break;
-        case 5: _t->addLeagueResult((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 6: _t->updateLeagues(); break;
+        case 3: _t->aktualizuj_zarzadzaj_miejscami(); break;
+        case 4: _t->aktualizuj_ligi(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -117,27 +108,15 @@ void CRest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
             }
         }
         {
-            typedef void (CRest::*_t)(QString );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&CRest::addGamingPlaceResult)) {
+            typedef void (CRest::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&CRest::aktualizuj_zarzadzaj_miejscami)) {
                 *result = 3;
             }
         }
         {
             typedef void (CRest::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&CRest::updateGamingPlaces)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&CRest::aktualizuj_ligi)) {
                 *result = 4;
-            }
-        }
-        {
-            typedef void (CRest::*_t)(QString );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&CRest::addLeagueResult)) {
-                *result = 5;
-            }
-        }
-        {
-            typedef void (CRest::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&CRest::updateLeagues)) {
-                *result = 6;
             }
         }
     }
@@ -168,13 +147,13 @@ int CRest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 5;
     }
     return _id;
 }
@@ -200,28 +179,14 @@ void CRest::fileNotFound(QString _t1)
 }
 
 // SIGNAL 3
-void CRest::addGamingPlaceResult(QString _t1)
+void CRest::aktualizuj_zarzadzaj_miejscami()
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 3, _a);
+    QMetaObject::activate(this, &staticMetaObject, 3, 0);
 }
 
 // SIGNAL 4
-void CRest::updateGamingPlaces()
+void CRest::aktualizuj_ligi()
 {
     QMetaObject::activate(this, &staticMetaObject, 4, 0);
-}
-
-// SIGNAL 5
-void CRest::addLeagueResult(QString _t1)
-{
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 5, _a);
-}
-
-// SIGNAL 6
-void CRest::updateLeagues()
-{
-    QMetaObject::activate(this, &staticMetaObject, 6, 0);
 }
 QT_END_MOC_NAMESPACE

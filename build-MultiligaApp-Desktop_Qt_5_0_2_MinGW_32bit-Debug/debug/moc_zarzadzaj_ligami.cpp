@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_zarzadzaj_ligami_t {
     QByteArrayData data[8];
-    char stringdata[110];
+    char stringdata[114];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,14 +32,14 @@ static const qt_meta_stringdata_zarzadzaj_ligami_t qt_meta_stringdata_zarzadzaj_
 QT_MOC_LITERAL(0, 0, 16),
 QT_MOC_LITERAL(1, 17, 28),
 QT_MOC_LITERAL(2, 46, 0),
-QT_MOC_LITERAL(3, 47, 6),
-QT_MOC_LITERAL(4, 54, 12),
-QT_MOC_LITERAL(5, 67, 12),
-QT_MOC_LITERAL(6, 80, 4),
-QT_MOC_LITERAL(7, 85, 23)
+QT_MOC_LITERAL(3, 47, 10),
+QT_MOC_LITERAL(4, 58, 12),
+QT_MOC_LITERAL(5, 71, 12),
+QT_MOC_LITERAL(6, 84, 4),
+QT_MOC_LITERAL(7, 89, 23)
     },
     "zarzadzaj_ligami\0on_commandLinkButton_clicked\0"
-    "\0update\0wczytaj_dane\0fileNotFound\0"
+    "\0aktualizuj\0wczytaj_dane\0fileNotFound\0"
     "comm\0on_pushButton_3_clicked\0"
 };
 #undef QT_MOC_LITERAL
@@ -80,7 +80,7 @@ void zarzadzaj_ligami::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         zarzadzaj_ligami *_t = static_cast<zarzadzaj_ligami *>(_o);
         switch (_id) {
         case 0: _t->on_commandLinkButton_clicked(); break;
-        case 1: _t->update(); break;
+        case 1: _t->aktualizuj(); break;
         case 2: _t->wczytaj_dane(); break;
         case 3: _t->fileNotFound((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 4: _t->on_pushButton_3_clicked(); break;

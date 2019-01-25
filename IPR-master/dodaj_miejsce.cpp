@@ -8,13 +8,10 @@ dodaj_miejsce::dodaj_miejsce(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::dodaj_miejsce)
 {
-    connect(&CRest::getRest(), SIGNAL(addGamingPlaceResult(QString)), this, SLOT(addGamingPlaceResult(QString)));
-    connect(&CRest::getRest(), SIGNAL(wrongPassword(QString)), this, SLOT(addGamingPlaceResult(QString)));
-    connect(&CRest::getRest(), SIGNAL(fileNotFound(QString)), this, SLOT(addGamingPlaceResult(QString)));
-
     ui->setupUi(this);
 
     this->wczytaj_dane();
+    this->open();
 }
 
 dodaj_miejsce::~dodaj_miejsce()
@@ -25,99 +22,80 @@ dodaj_miejsce::~dodaj_miejsce()
 
 void dodaj_miejsce::on_pushButton_3_clicked()
 {
-    std::string newPlaceName = ui->lineEdit->text().toStdString();
-    std::string newPlaceTown = ui->comboBox_3->currentText().toStdString();
-    std::string newPlaceSport = ui->comboBox_2->currentText().toStdString();
-    float newPlacePayment = (ui->comboBox->currentText().toFloat());
-    std::string providedPwd = ui->lineEdit_3->text().toStdString();
-    if (newPlaceName == "")
+    std::string nazwa_miejsca = ui->lineEdit->text().toStdString();
+    std::string nazwa_miasta = ui->comboBox_3->currentText().toStdString();
+    std::string nazwa_dyscypliny = ui->comboBox_2->currentText().toStdString();
+    float oplata = (ui->lineEdit_2->text().toFloat());
+
+    if (oplata <= 0)
     {
-        ui->label_3->setText("Proszę wprowadzić wszystkie dane");
+        ui->label_3->setText("Prosze podać dodatnia stawke");
         return;
     }
-    if (newPlacePayment <= 0)
+
+    if (nazwa_miejsca == "")
     {
-        ui->label_3->setText("Prosze podać dodania stawke");
+        ui->label_3->setText("Proszę wpisać nazwę miejsca rozgrywek");
+        return;
     }
 
-    if (CRest::getRest().logged_user->sprawdz_haslo(providedPwd))
-    {
-        CMiejsce* newPlace = new CMiejsce(newPlaceName, newPlaceTown, newPlaceSport, newPlacePayment);
-        newPlace->serializuj();
-        newPlace->wyslij_siebie();
+    CMiejsce* newPlace = new CMiejsce(nazwa_miejsca, nazwa_miasta, nazwa_dyscypliny, oplata);
+    newPlace->serializuj();
+    newPlace->wyslij_siebie();
 
-        CRest::getRest().dodaj_miejsce_rozgrywki();
-        this->wyswietlenieMiejsca = new profil_miejsca(this, newPlace);
-        this->wyswietlenieMiejsca->open();
-    }
-    else
-    {
-        ui->label_3->setText("Wprowadzono niewłaściwe hasło");
-    }
-
+    CRest::getRest().dodaj_miejsce_rozgrywki();
+    this->wyswietlenieMiejsca = new profil_miejsca(this, newPlace);
 }
+
 void dodaj_miejsce::addGamingPlaceResult(QString comm)
 {
     this->ui->label_3->setText(comm);
 }
+
 void dodaj_miejsce::wczytaj_dane()
 {
-    CListaMiast* availableTowns = new CListaMiast();
-    availableTowns->ListaMiastDOM = availableTowns->deserializuj("listamiast.json");
+    CListaMiast* lista_miast = new CListaMiast();
+    CListaDyscyplin* lista_dyscyplin = new CListaDyscyplin();
 
-    CListaDyscyplin* availableSports = new CListaDyscyplin();
-    availableSports->ListaDyscyplinDOM = availableSports->deserializuj("listadyscyplin.json");
+    lista_miast->ListaMiastDOM = lista_miast->pobierz_dane("listamiast.json");
+    lista_dyscyplin->ListaDyscyplinDOM = lista_dyscyplin->pobierz_dane("listadyscyplin.json");
 
-    ui->comboBox_3->clear();
-
-    for (auto& i : availableTowns->ListaMiastDOM["miasta"].GetArray())
-    {
-        ui->comboBox_3->addItem(QString::fromStdString(i.GetString()));
-    }
-
-    ui->comboBox_2->clear();
-
-    for (auto& i : availableSports->ListaDyscyplinDOM["dyscypliny"].GetArray())
-    {
-        ui->comboBox_2->addItem(QString::fromStdString(i.GetString()));
-    }
-
-    COplaty* prices = new COplaty();
-    prices->lista_oplat_DOM = prices->deserializuj("oplaty.json");
-    ui->comboBox->clear();
-
-    for (auto& i : prices->lista_oplat_DOM["oplaty"].GetArray())
-    {
-        ui->comboBox->addItem(QString::fromStdString(i.GetString()));
-    }
+    this->aktualizuj(lista_miast, lista_dyscyplin);
 }
 
 void dodaj_miejsce::on_pushButton_2_clicked()
 {
-    if (this->ui->lineEdit_4->text().toStdString() != "" &&
-        this-> ui->lineEdit_2->text().toStdString() != "")
+    std::string nazwa_dyscypliny = this->ui->lineEdit_4->text().toStdString();
+    if (nazwa_dyscypliny != "")
 
     {
-        CDyscyplina* newSport = new CDyscyplina;
-        newSport->nazwaDyscypliny = this->ui->lineEdit_4->text().toStdString();
+        CDyscyplina* newSport = new CDyscyplina(nazwa_dyscypliny);
 
         newSport->serializuj();
         newSport->wyslij_siebie();
 
         CRest::getRest().dodaj_dyscypline();
 
-        COplaty* newPrice = new COplaty;
-        newPrice->priceAsString = this->ui->lineEdit_2->text().toStdString();
-
-        newPrice->serializuj();
-        newPrice->wyslij_siebie();
-
-        CRest::getRest().dodaj_oplate();
-
         this->wczytaj_dane();
-        this->ui->label_3->setText("Dodano dyscypline i oplate");
     }
     else
-        ui->label_3->setText("Prosze podac oplata i dyscypline");
+        ui->label_3->setText("Prosze wpisać nazwę dyscypliny");
 
+}
+
+void dodaj_miejsce::aktualizuj(CListaMiast* lista_miast, CListaDyscyplin* lista_dyscyplin)
+{
+    ui->comboBox_3->clear();
+
+    for (auto& i : lista_miast->ListaMiastDOM["miasta"].GetArray())
+    {
+        ui->comboBox_3->addItem(QString::fromStdString(i.GetString()));
+    }
+
+    ui->comboBox_2->clear();
+
+    for (auto& i : lista_dyscyplin->ListaDyscyplinDOM["dyscypliny"].GetArray())
+    {
+        ui->comboBox_2->addItem(QString::fromStdString(i.GetString()));
+    }
 }

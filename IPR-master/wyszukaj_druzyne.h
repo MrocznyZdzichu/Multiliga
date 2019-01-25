@@ -23,11 +23,12 @@ public:
 
 private:
     Ui::wyszukaj_druzyne *ui;
+    CListaDruzyn* lista_druzyn;
 
 private slots:
     void wczytaj_dane();
     void on_pushButton_3_clicked();
-    void wypisz_druzyny (CListaDruzyn* druzyny);
+    void druzyny_do_wyswietlenia (CListaDruzyn* druzyny);
     void on_tableWidget_cellClicked(int row, int column);
 };
 

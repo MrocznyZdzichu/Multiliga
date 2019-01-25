@@ -15,7 +15,7 @@ public:
     rapidjson::Document ListaMiastDOM;
     std::list<CMiasto> listaMiast;
 
-    rapidjson::Document deserializuj(std::string jsonname);
+    rapidjson::Document pobierz_dane(std::string jsonname);
     void serializuj();
     void wyslij_siebie();
 

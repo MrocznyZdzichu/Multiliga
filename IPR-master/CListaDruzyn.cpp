@@ -35,7 +35,7 @@ CListaDruzyn::~CListaDruzyn()
 
 void CListaDruzyn::wyslij_siebie()
 {
-    CRest::getRest().current_json = this->JSonString;
+    CRest::getRest().current_json = this->json_do_wyslania;
 }
 
 void CListaDruzyn::serializuj()
@@ -43,25 +43,25 @@ void CListaDruzyn::serializuj()
 
 }
 
-Document CListaDruzyn::deserializuj(std::string jsonname)
+Document CListaDruzyn::pobierz_dane(std::string jsonname)
 {
     bool flag;
-    Document d = CRest::getRest().getJSonAndPass(jsonname.c_str(), flag);
+    Document d = CRest::getRest().wez_json_i_przekaz(jsonname.c_str(), flag);
     if (flag)
     return d;
 }
 
-void CListaDruzyn::serializujSzukane()
+void CListaDruzyn::serializuj_szukane()
 {
-    this->JSonString = "";
-    this->JSonString += this->druzynaSzukana->nazwa;
-    this->JSonString += "_";
-    this->JSonString += this->druzynaSzukana->dyscyplina->nazwaDyscypliny;
-    this->JSonString += "_";
-    this->JSonString += this->druzynaSzukana->liga->nazwaLigi;
-    this->JSonString += "_";
-    this->JSonString += this->druzynaSzukana->miasto->nazwaMiasta;
-    this->JSonString += "_";
+    this->json_do_wyslania = "";
+    this->json_do_wyslania += this->druzynaSzukana->nazwa;
+    this->json_do_wyslania += "_";
+    this->json_do_wyslania += this->druzynaSzukana->dyscyplina->nazwaDyscypliny;
+    this->json_do_wyslania += "_";
+    this->json_do_wyslania += this->druzynaSzukana->liga->nazwaLigi;
+    this->json_do_wyslania += "_";
+    this->json_do_wyslania += this->druzynaSzukana->miasto->nazwaMiasta;
+    this->json_do_wyslania += "_";
 }
 
 Document CListaDruzyn::deserializujSzukane(std::string jsonname)
@@ -71,7 +71,7 @@ Document CListaDruzyn::deserializujSzukane(std::string jsonname)
 std::vector<std::string> parseJS(std::string baseString);
 void CListaDruzyn::wybierzDruzyny()
 {
-    std::string baseString = this->JSonString;
+    std::string baseString = this->json_do_wyslania;
     std::vector<std::string> filtersy = parseJS(baseString);
 
     std::string nazwa1, dyscyplina1, liga1, miasto1;
@@ -132,4 +132,48 @@ std::vector<std::string> parseJS(std::string baseString)
         }
     }
     return output;
+}
+
+CDruzyna* CListaDruzyn::zwroc_druzyne(std::string nazwa_druzyny)
+{
+    CDruzyna* wyswietlana_druzyna = new CDruzyna;
+    for (auto& druzyna : this->listaDruzynDOM["listaDruzyn"].GetArray())
+    {
+        if (druzyna["nazwa"].GetString() == nazwa_druzyny)
+        {
+            wyswietlana_druzyna->nazwa = druzyna["nazwa"].GetString();
+            wyswietlana_druzyna->dyscyplina->nazwaDyscypliny = druzyna["dyscyplina"].GetString();
+            for (auto& gracze : druzyna["gracze"].GetArray())
+            {
+                std::string imie = "";
+                std::string nazwisko = "";
+                bool czy_spacja_juz_byla = 0;
+                std::string temp = gracze.GetString();
+                char character;
+                for (int i = 0; i < temp.size(); i++)
+                {
+                    character = temp[i];
+                    if (character == ' ')
+                    {
+                        czy_spacja_juz_byla = true;
+                        continue;
+                    }
+                    if (!czy_spacja_juz_byla)
+                        imie += character;
+                    else
+                        nazwisko += character;
+                }
+                CGracz* czlonek_druzyny = new CGracz;
+                czlonek_druzyny->setImie(imie);
+                czlonek_druzyny->setNazwisko(nazwisko);
+                wyswietlana_druzyna->graczeDruzyny.push_back(czlonek_druzyny);
+            }
+            wyswietlana_druzyna->liga->nazwaLigi = druzyna["liga"].GetString();
+            wyswietlana_druzyna->miasto->nazwaMiasta = druzyna["miasto"].GetString();
+            wyswietlana_druzyna->opis = druzyna["opis"].GetString();
+            wyswietlana_druzyna->poprzednia_liga->nazwaLigi = druzyna["poprzednia liga"].GetString();
+            wyswietlana_druzyna->osiagniecia = druzyna["osiagniecia"].GetString();
+        }
+    }
+    return wyswietlana_druzyna;
 }

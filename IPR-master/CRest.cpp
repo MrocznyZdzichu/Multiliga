@@ -30,7 +30,7 @@ std::string shortenMail(std::string originMail);
 void CRest::getJSon(bool& fileExist)
 {
     std::fstream fileChecker;
-    fileChecker.open(this->candidate_login.c_str(), std::ios_base::in);
+    fileChecker.open(this->podany_mail.c_str(), std::ios_base::in);
 
     if (!fileChecker.is_open())
     {
@@ -40,7 +40,7 @@ void CRest::getJSon(bool& fileExist)
     }
     fileExist = 1;
 
-    FILE* fp = fopen(this->candidate_login.c_str(), "rb");
+    FILE* fp = fopen(this->podany_mail.c_str(), "rb");
     char readBuffer[65536];
     FileReadStream is(fp, readBuffer, sizeof(readBuffer));
     this->object0JSon.ParseStream(is);
@@ -54,7 +54,7 @@ void CRest::getJSon(std::string filename, bool& fileExist)
 
     if (!fileChecker.is_open())
     {
-        emit wrongLogin();
+        //emit wrongLogin();
         fileExist = 0;
         return;
     }
@@ -65,8 +65,9 @@ void CRest::getJSon(std::string filename, bool& fileExist)
     FileReadStream is(fp, readBuffer, sizeof(readBuffer));
     this->object0JSon.ParseStream(is);
     fclose(fp);
+    return;
 }
-Document CRest::getJSonAndPass(std::string filename, bool& fileExist)
+Document CRest::wez_json_i_przekaz(std::string filename, bool& fileExist)
 {
     std::fstream fileChecker;
     fileChecker.open(filename.c_str(), std::ios_base::in);
@@ -108,7 +109,7 @@ bool CRest::sprawdz_unikalnosc(std::string unikalneID)
 
 void CRest::logInOpiekun()
 {
-    this->logged_user = new COpiekun (this->object0JSon["imie"].GetString(), this->object0JSon["nazwisko"].GetString(),
+    this->zalogowany_uzytkownik = new COpiekun (this->object0JSon["imie"].GetString(), this->object0JSon["nazwisko"].GetString(),
                                       this->object0JSon["email"].GetString(), this->object0JSon["haslo"].GetString());
 }
 
@@ -144,8 +145,7 @@ void CRest::dodaj_miejsce_rozgrywki()
     }
 
     QString addSuccessfully = QString("Dodano nowe miejsce rozgrywek");
-    emit addGamingPlaceResult(addSuccessfully);
-    emit updateGamingPlaces();
+    emit aktualizuj_zarzadzaj_miejscami();
     return;
 }
 void CRest::dodaj_do_listy_miejsc (std::fstream& listamiejsc)
@@ -178,9 +178,9 @@ void CRest::dodaj_plik_z_miejscem(std::fstream &plik_z_miejscem)
 
 bool CRest::sprawdz_haslo(std::string providedPwd)
 {
-    if (this->logged_user != NULL)
+    if (this->zalogowany_uzytkownik != NULL)
     {
-        if (providedPwd == this->logged_user->getPwd())
+        if (providedPwd == this->zalogowany_uzytkownik->getPwd())
             return 1;
         else
         {
@@ -190,7 +190,7 @@ bool CRest::sprawdz_haslo(std::string providedPwd)
     }
     else
     {
-        if (this->candidate_pwd == this->object0JSon["haslo"].GetString())
+        if (this->podane_haslo == this->object0JSon["haslo"].GetString())
         {
             return 1;
         }
@@ -213,7 +213,6 @@ void CRest::dodaj_lige()
     }
     else
     {
-        emit fileNotFound("Nie znaleziono listy lig");
         return;
     }
 
@@ -227,14 +226,7 @@ void CRest::dodaj_lige()
     {
         this->dodaj_plik_z_liga(plik_z_miejscem);
     }
-    else
-    {
-        emit fileNotFound("Nie udało się stworzyć pliku z ligą");
-    }
-
-    QString addSuccessfully = QString("Dodano nową ligę");
-    emit addLeagueResult(addSuccessfully);
-    emit updateLeagues();
+    emit aktualizuj_ligi();
     return;
 }
 
@@ -337,5 +329,49 @@ void CRest::dodaj_oplate()
 Document CRest::odbierz_druzyny()
 {
     CListaDruzyn* temp = new CListaDruzyn;
-    return temp->deserializuj("listaDruzyn.json");
+    return temp->pobierz_dane("listaDruzyn.json");
+}
+
+std::string CRest::sprawdz_uzytkownika(bool& czyHasloPoprawne)
+{
+    std::string fileName = this->zalogowany_uzytkownik->getEmail();
+    for (int i = 0; i < fileName.size(); i++)
+    {
+        if (fileName[i] == '.')
+            fileName[i] = '_';
+    }
+    fileName += ".json";
+
+    bool czyPlikIstnieje = false;
+    this->getJSon(fileName.c_str(), czyPlikIstnieje);
+    if (czyPlikIstnieje)
+    {
+        if (this->object0JSon["haslo"].GetString() == this->zalogowany_uzytkownik->getPwd())
+        {
+            czyHasloPoprawne = 1;
+            std::string poziom_uprawnien;
+            poziom_uprawnien = this->object0JSon["level"].GetString();
+            return poziom_uprawnien;
+        }
+        else
+        {
+            czyHasloPoprawne = 0;
+            return "";
+        }
+    }
+    else
+    {
+        czyHasloPoprawne = 0;
+        return "";
+    }
+}
+
+void CRest::dodaj_zaproszenie_do_ligi_druzynowej()
+{
+    std::fstream plik;
+    std::string nazwa_pliku = this->object_id;
+    nazwa_pliku += ".json";
+    plik.open(nazwa_pliku.c_str(), std::ios_base::out);
+
+    plik << this->current_json;
 }

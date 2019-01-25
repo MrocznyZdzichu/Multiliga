@@ -29,18 +29,25 @@ CUzytkownik::~CUzytkownik()
 {
 
 }
-rapidjson::Document CUzytkownik::deserializuj(std::string jsonname)
+rapidjson::Document CUzytkownik::pobierz_dane(std::string jsonname)
 {
 
 }
 void CUzytkownik::serializuj()
 {
-
+    this->json_do_wyslania ="{\"email\": \"";
+    this->json_do_wyslania += this->email;
+    this->json_do_wyslania += "\", \"imie\": \"";
+    this->json_do_wyslania += this->imie;
+    this->json_do_wyslania += "\", \"nazwisko\": \"";
+    this->json_do_wyslania += this->nazwisko;
+    this->json_do_wyslania += "\", \"haslo\": \"";
+    this->json_do_wyslania += this->haslo;
+    this->json_do_wyslania += "\", \"level\": \"\"}";
 }
 void CUzytkownik::wyslij_siebie()
 {
-    CRest::getRest().candidate_login = CUzytkownik::shortenMail(this->email);
-    CRest::getRest().candidate_pwd = this->haslo;
+    CRest::getRest().zalogowany_uzytkownik = this;
 }
 
 bool CUzytkownik::sprawdz_haslo(std::string providedPwd)
@@ -83,7 +90,7 @@ std::string CUzytkownik::getImie()
     return this->imie;
 }
 
-std::string CUzytkownik::getNaziwsko()
+std::string CUzytkownik::getNazwisko()
 {
     return this->nazwisko;
 }

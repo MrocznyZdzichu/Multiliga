@@ -48,7 +48,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLineEdit *lineEdit;
     QComboBox *comboBox_2;
-    QComboBox *comboBox;
+    QLineEdit *lineEdit_2;
     QComboBox *comboBox_3;
     QVBoxLayout *verticalLayout_4;
     QGroupBox *groupBox_3;
@@ -56,20 +56,14 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_5;
     QLabel *label_4;
-    QLabel *label_5;
     QVBoxLayout *verticalLayout_6;
     QLineEdit *lineEdit_4;
-    QLineEdit *lineEdit_2;
     QPushButton *pushButton_2;
     QGroupBox *groupBox_2;
     QListView *listView;
     QCommandLinkButton *commandLinkButton;
     QCommandLinkButton *commandLinkButton_3;
     QPushButton *pushButton_3;
-    QWidget *layoutWidget1;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_6;
-    QLineEdit *lineEdit_3;
 
     void setupUi(QDialog *dodaj_miejsce)
     {
@@ -136,10 +130,10 @@ public:
 
         verticalLayout_2->addWidget(comboBox_2);
 
-        comboBox = new QComboBox(layoutWidget_2);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
+        lineEdit_2 = new QLineEdit(layoutWidget_2);
+        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
 
-        verticalLayout_2->addWidget(comboBox);
+        verticalLayout_2->addWidget(lineEdit_2);
 
         comboBox_3 = new QComboBox(layoutWidget_2);
         comboBox_3->setObjectName(QStringLiteral("comboBox_3"));
@@ -172,11 +166,6 @@ public:
 
         verticalLayout_5->addWidget(label_4);
 
-        label_5 = new QLabel(layoutWidget_3);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        verticalLayout_5->addWidget(label_5);
-
 
         horizontalLayout_2->addLayout(verticalLayout_5);
 
@@ -186,11 +175,6 @@ public:
         lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
 
         verticalLayout_6->addWidget(lineEdit_4);
-
-        lineEdit_2 = new QLineEdit(layoutWidget_3);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-
-        verticalLayout_6->addWidget(lineEdit_2);
 
 
         horizontalLayout_2->addLayout(verticalLayout_6);
@@ -231,22 +215,6 @@ public:
 
         verticalLayout_8->addWidget(pushButton_3);
 
-        layoutWidget1 = new QWidget(dodaj_miejsce);
-        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(130, 400, 311, 24));
-        horizontalLayout_4 = new QHBoxLayout(layoutWidget1);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
-        label_6 = new QLabel(layoutWidget1);
-        label_6->setObjectName(QStringLiteral("label_6"));
-
-        horizontalLayout_4->addWidget(label_6);
-
-        lineEdit_3 = new QLineEdit(layoutWidget1);
-        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
-
-        horizontalLayout_4->addWidget(lineEdit_3);
-
 
         retranslateUi(dodaj_miejsce);
 
@@ -262,15 +230,13 @@ public:
         label_8->setText(QApplication::translate("dodaj_miejsce", "Dyscyplina", 0));
         label_7->setText(QApplication::translate("dodaj_miejsce", "Op\305\202ata", 0));
         label->setText(QApplication::translate("dodaj_miejsce", "Miasto", 0));
-        groupBox_3->setTitle(QApplication::translate("dodaj_miejsce", "Dodaj dyscyplin\304\231 i op\305\202at\304\231", 0));
+        groupBox_3->setTitle(QApplication::translate("dodaj_miejsce", "Dodaj now\304\205 dyscyplin\304\231", 0));
         label_4->setText(QApplication::translate("dodaj_miejsce", "Dyscyplina", 0));
-        label_5->setText(QApplication::translate("dodaj_miejsce", "Op\305\202ata", 0));
-        pushButton_2->setText(QApplication::translate("dodaj_miejsce", "Dodaj dyscyplin\304\231 i op\305\202at\304\231", 0));
+        pushButton_2->setText(QApplication::translate("dodaj_miejsce", "Dodaj dyscyplin\304\231", 0));
         groupBox_2->setTitle(QApplication::translate("dodaj_miejsce", "Dyscypliny oraz op\305\202aty", 0));
         commandLinkButton->setText(QApplication::translate("dodaj_miejsce", "Dyscyplina i cena", 0));
         commandLinkButton_3->setText(QApplication::translate("dodaj_miejsce", "Usu\305\204", 0));
         pushButton_3->setText(QApplication::translate("dodaj_miejsce", "Dodaj miejsce rozgrywek", 0));
-        label_6->setText(QApplication::translate("dodaj_miejsce", "Potwierd\305\272 has\305\202em", 0));
     } // retranslateUi
 
 };

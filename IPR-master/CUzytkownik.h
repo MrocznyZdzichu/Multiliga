@@ -26,7 +26,7 @@ public:
     bool zmien_email(std::string n_email, std::string haslo);
     void zmien_haslo(std::string haslo, std::string n_haslo);
 
-    rapidjson::Document deserializuj(std::string jsonname);
+    rapidjson::Document pobierz_dane(std::string jsonname);
     void serializuj();
     void wyslij_siebie();
     static std::string shortenMail(std::string originMail);
@@ -34,7 +34,7 @@ public:
     std::string getEmail();
     std::string getPwd();
     std::string getImie();
-    std::string getNaziwsko();
+    std::string getNazwisko();
 
     void setImie(std::string imie);
     void setNazwisko(std::string nazwisko);

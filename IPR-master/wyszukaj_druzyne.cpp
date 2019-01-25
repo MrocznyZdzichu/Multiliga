@@ -7,6 +7,7 @@ wyszukaj_druzyne::wyszukaj_druzyne(QWidget *parent) :
 {
     ui->setupUi(this);
     this->wczytaj_dane();
+    this->open();
 }
 
 wyszukaj_druzyne::~wyszukaj_druzyne()
@@ -19,7 +20,7 @@ void wyszukaj_druzyne::wczytaj_dane()
     this->ui->comboBox_2->clear();
 
     CListaDyscyplin* availableSports = new CListaDyscyplin;
-    availableSports->ListaDyscyplinDOM = availableSports->deserializuj("listadyscyplin.json");
+    availableSports->ListaDyscyplinDOM = availableSports->pobierz_dane("listadyscyplin.json");
 
     if (availableSports->ListaDyscyplinDOM != NULL)
     {
@@ -33,7 +34,7 @@ void wyszukaj_druzyne::wczytaj_dane()
     this->ui->comboBox->addItem(QString::fromStdString("brak"));
 
     CListaLig* availableLeagues = new CListaLig();
-    availableLeagues->listaLigDOM = availableLeagues->deserializuj("listaLig.json");
+    availableLeagues->listaLigDOM = availableLeagues->pobierz_dane("listaLig.json");
 
     if (availableLeagues->listaLigDOM != NULL)
     {
@@ -46,7 +47,7 @@ void wyszukaj_druzyne::wczytaj_dane()
     this->ui->comboBox_3->clear();
 
     CListaMiast* availableTowns = new CListaMiast;
-    availableTowns->ListaMiastDOM = availableSports->deserializuj("listamiast.json");
+    availableTowns->ListaMiastDOM = availableSports->pobierz_dane("listamiast.json");
 
     if (availableTowns->ListaMiastDOM != NULL)
     {
@@ -64,26 +65,27 @@ void wyszukaj_druzyne::on_pushButton_3_clicked()
     std::string nazwaMiasta = ui->comboBox_3->currentText().toStdString();
     std::string nazwaDyscypliny = ui->comboBox_2->currentText().toStdString();
 
-    CListaDruzyn* listaDruzyn = new CListaDruzyn(nazwaDruzyny, nazwaLigi, nazwaMiasta, nazwaDyscypliny);
-    listaDruzyn->serializujSzukane();
-    listaDruzyn->wyslij_siebie();
+    this->lista_druzyn = new CListaDruzyn(nazwaDruzyny, nazwaLigi, nazwaMiasta, nazwaDyscypliny);
+    lista_druzyn->serializuj_szukane();
+    lista_druzyn->wyslij_siebie();
 
-    listaDruzyn->listaDruzynDOM = CRest::getRest().odbierz_druzyny();
-    listaDruzyn->wybierzDruzyny();
-    bool czyDruzynyGotowe = listaDruzyn->lista_gotowa();
+    lista_druzyn->listaDruzynDOM = CRest::getRest().odbierz_druzyny();
+    lista_druzyn->wybierzDruzyny();
+    bool czyDruzynyGotowe = lista_druzyn->lista_gotowa();
 
     if (czyDruzynyGotowe)
     {
-        wypisz_druzyny(listaDruzyn);
-        this->ui->label->setText("Wyniki wyszuiwania znajdują się w tabeli poniżej");
+        druzyny_do_wyswietlenia(lista_druzyn);
+        this->ui->label->setText("Wyniki wyszukiwania znajdują się w tabeli poniżej");
     }
     else
     {
         ui->label->setText("Nie ma takiej druzyny");
+        ui->tableWidget->clear();
     }
 }
 
-void wyszukaj_druzyne::wypisz_druzyny(CListaDruzyn *druzyny)
+void wyszukaj_druzyne::druzyny_do_wyswietlenia(CListaDruzyn *druzyny)
 {
     this->ui->tableWidget->setColumnCount(4);
     int rowCount = druzyny->indeksySzukanychDruzyn.size();
@@ -124,13 +126,14 @@ void wyszukaj_druzyne::wypisz_druzyny(CListaDruzyn *druzyny)
     }
 }
 
+//Odpowiada metodzie wyswietl_druzyne
 void wyszukaj_druzyne::on_tableWidget_cellClicked(int row, int column)
 {
     profil_druzyny* teamInfo;
-    std::string fileName;
-    fileName = this->ui->tableWidget->item(row, 0)->text().toStdString();
-    fileName += ".json";
+    std::string nazwa_druzyny;
+    nazwa_druzyny = this->ui->tableWidget->item(row, 0)->text().toStdString();
+    CDruzyna* wyszukana_druzyna = this->lista_druzyn->zwroc_druzyne(nazwa_druzyny);
 
-    teamInfo = new profil_druzyny(this, fileName);
+    teamInfo = new profil_druzyny(this, wyszukana_druzyna);
     teamInfo->open();
 }
