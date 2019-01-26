@@ -44,6 +44,7 @@ void dodaj_miejsce::on_pushButton_3_clicked()
     newPlace->wyslij_siebie();
 
     CRest::getRest().dodaj_miejsce_rozgrywki();
+    this->ui->label_3->clear();
     this->wyswietlenieMiejsca = new profil_miejsca(this, newPlace);
 }
 
@@ -75,7 +76,7 @@ void dodaj_miejsce::on_pushButton_2_clicked()
         newSport->wyslij_siebie();
 
         CRest::getRest().dodaj_dyscypline();
-
+        this->ui->label_3->clear();
         this->wczytaj_dane();
     }
     else
